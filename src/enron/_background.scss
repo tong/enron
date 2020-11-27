@@ -1,0 +1,23 @@
+@mixin checkerboard($size:1rem, $colorA:#000, $colorB:#fff) {
+  background-color: $colorA;
+  background-image:
+    linear-gradient(45deg, $colorB 25%, transparent 25%, transparent 75%, $colorB 75%, $colorB),
+    linear-gradient(45deg, $colorB 25%, transparent 25%, transparent 75%, $colorB 75%, $colorB);
+  background-size: $size $size;
+  background-position: 0 0, $size/2 $size/2;
+}
+
+@mixin checkerboard-diagonal($size:1rem, $colorA:#000, $colorB:#fff) {
+  background-color: $colorA;
+  background-image: linear-gradient(45deg, $colorB 25%, transparent 25%, transparent 75%, $colorB 75%, $colorB),
+    linear-gradient(-45deg, $colorB 25%, transparent 25%, transparent 75%, $colorB 75%, $colorB);
+  background-size: $size $size;
+}
+
+@mixin dots($size: 10px, $distance:50px, $pointColor:#000, $colorB:#fff) {
+  background:
+    radial-gradient($pointColor $size, transparent $size),
+    radial-gradient($pointColor $size, transparent $size);
+  background-size: $distance $distance, $distance $distance, 100% 0px, $distance $distance, $distance $distance;
+  background-position: $distance/2 $distance/2, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+}
