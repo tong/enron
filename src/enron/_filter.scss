@@ -1,0 +1,131 @@
+/* --- ENRON/FILTER --- */
+
+@mixin blur( $radius: 5px ) {
+	filter: blur( $radius );
+}
+@mixin brightness( $percent: 100% ) {
+	filter: brightness( $percent );
+}
+
+// ---
+
+@mixin butterfly {
+    filter:
+        brightness(130%)
+        contrast(120%)
+        grayscale(0%)
+        hue-rotate(0deg)
+        invert(10%)
+        saturate(180%)
+        sepia(0%);
+}
+@mixin cooper {
+	filter:
+		brightness(240%)
+		contrast(80%)
+		grayscale(0%)
+		hue-rotate(0deg)
+		invert(30%)
+		saturate(100%)
+		sepia(100%);
+}
+@mixin eureka {
+    filter:
+        brightness(160%)
+        contrast(110%)
+        grayscale(0%)
+        hue-rotate(0deg)
+        invert(10%)
+        saturate(90%)
+        sepia(0%);
+}
+@mixin flipflop {
+    filter:
+        brightness(130%)
+    	contrast(110%)
+    	grayscale(0%)
+    	hue-rotate(180deg)
+    	invert(0%)
+    	saturate(200%)
+    	sepia(0%);
+}
+@mixin gold {
+    filter:
+		brightness(120%)
+		contrast(120%)
+		grayscale(0%)
+		hue-rotate(0deg)
+		invert( 0%)
+		saturate(100%)
+		sepia(100%);
+}
+@mixin introvert {
+    filter:
+		brightness(110%)
+		contrast(120%)
+		grayscale(0%)
+		hue-rotate(0deg)
+		invert(90%)
+		saturate(70%)
+		sepia(30%);
+}
+@mixin karl {
+    filter:
+		brightness(110%)
+		contrast(240%)
+		grayscale(100%)
+		hue-rotate(0deg)
+		invert(32%)
+		saturate(0%)
+		sepia(11%);
+}
+@mixin lofi {
+    filter:
+		brightness(150%)
+		contrast(999%)
+		grayscale(60%)
+		hue-rotate(0deg)
+		invert(23%)
+		saturate(100%)
+		sepia(20%);
+}
+@mixin london {
+    filter:
+		brightness(130%)
+		contrast(80%)
+		grayscale(90%)
+		hue-rotate(0deg)
+		invert(0%)
+		saturate(100%)
+		sepia(0%);
+}
+@mixin night {
+    filter:
+        brightness( 50%)
+        contrast(170%)
+        grayscale(0%)
+        hue-rotate(0deg)
+        invert(13%)
+        saturate(10%)
+        sepia(20%);
+}
+@mixin rocky {
+    filter:
+		brightness(130%)
+		contrast(140%)
+		grayscale(0%)
+		hue-rotate(0deg)
+		invert(7%)
+		saturate(50%)
+		sepia(0%);
+}
+@mixin silver {
+    filter:
+		brightness(190%)
+		contrast(160%)
+		grayscale(0%)
+		hue-rotate(0deg)
+		invert(20%)
+		saturate(0%)
+		sepia(0%);
+}
