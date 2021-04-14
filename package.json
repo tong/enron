@@ -1,0 +1,23 @@
+{
+  "name": "enron-s",
+  "version": "0.0.0",
+  "description": "S/CSS library",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 1",
+    "build": "sass src/enron enron.css",
+    "clean": "rm -f enron.css*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tong/enron-s.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tong/enron-s/issues"
+  },
+  "homepage": "https://github.com/tong/enron-s#readme",
+  "devDependencies": {
+    "sass": "^1.32.8"
+  }
+}
