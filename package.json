@@ -4,7 +4,7 @@
   "description": "S/CSS library",
   "scripts": {
     "test": "echo \"No test specified\" && exit 1",
-    "build": "sass src/enron enron.css",
+    "build": "sass src/enron.scss enron.css",
     "clean": "rm -f enron.css*"
   },
   "repository": {
