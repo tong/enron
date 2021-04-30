@@ -1,3 +1,5 @@
+/* --- ENRON/Z-INDEX --- */
+
 $z-max: 2147483647 !default;
 
 @mixin z($i) { z-index: $i }
@@ -11,8 +13,8 @@ $z-max: 2147483647 !default;
 @mixin z-10 { @include z(10) }
 
 //TODO
-/* @for $i from 1 through 3 {
-    //background-color: lighten($base-color, $i * 5%);
-    //@mixin z-0 { @include z(0); }
-    @debug $i;
-} */
+// /* @for $i from 1 through 3 {
+//     //background-color: lighten($base-color, $i * 5%);
+//     //@mixin z-0 { @include z(0); }
+//     @debug $i;
+// } */
