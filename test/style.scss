@@ -1,5 +1,88 @@
-@import 'enron';
+@use 'enron/animation';
+//@use 'enron/elevate' as *;
+@use 'enron/filter' as *;
+@use 'enron/glyph';
+@use 'enron/link-effect';
+@use 'enron/z-index';
 
 body {
+    //z-index: $z-max;
+    margin: 0;
+    height: 100%;
+    //@include z-10;
+    //@include blur();
+    //@include brightness();
 }
 
+h1 {
+    //@include elevate-4;
+}
+
+ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.bounce_in {
+    @include animation.bounce_in;
+}
+.fade_in {
+    @include animation.fade_in;
+}
+.slide_in_right {
+    @include animation.slide_in_right;
+}
+
+main {
+
+    > section {
+        margin: 1rem;
+        padding: 1rem 1rem 1rem 1rem;
+        border: 1px solid black;
+        &::before {
+            content: attr(data-id);
+            font-size: 75%;
+            text-transform: uppercase;
+        }
+        > section {
+            background: #eee;
+            margin: 1rem 0;
+            padding: 1rem;
+        }
+
+        &[data-id="animation"] {
+            > .animation {
+                padding: 2rem;
+                width: 50px;
+                height: 50px;
+                background: black;
+                color: white;
+                animation: 1s infinite;
+                // &.bounce_in { animation-name: bounce_in; }
+                // &.fade_in { animation-name: fade_in; }
+                // &.slide_in_right { animation-name: slide_in_right; }
+            }
+        }
+        &[data-id="glyphs"] {
+            > ol {
+                &::before {
+                    content: attr(data-glyph-group);
+                }
+            }
+            [data-glyph="ampersand"]:before { content: glyph.$ampersand; }
+            [data-glyph="leftwards-arrow"]:before { content: glyph.$leftwards-arrow; }
+            [data-glyph="upwards-arrow"]:before { content: glyph.$upwards-arrow; }
+            [data-glyph="rightwards-arrow"]:before { content: glyph.$rightwards-arrow; }
+            [data-glyph="downwards-arrow"]:before { content: glyph.$downwards-arrow; }
+        }
+        &[data-id="filter"] {
+            background: red;
+        }
+        &[data-id="link-effects"] {
+            > div {
+                padding: 1rem 0;
+            }
+        }
+    }
+}
