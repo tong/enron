@@ -1,0 +1,53 @@
+/* --- ENRON/TYPOGRAPHY --- */
+@use 'sass:map';
+@use 'sass:string';
+
+//TODO https://github.com/material-components/material-components-web/blob/master/packages/mdc-typography/_typography.scss
+
+$font-family: string.unquote('Roboto, sans-serif') !default;
+
+$font-weight-values: (thin: 100,
+    light: 300,
+    regular: 400,
+    medium: 500,
+    bold: 700,
+    black: 900,
+) !default;
+
+@function get-letter-spacing_($tracking, $font-size) {
+    @return $tracking / ($font-size * 16) * 1em;
+}
+
+@function px-to-rem($px) {
+    @return $px / 16px * 1rem;
+}
+
+@mixin body1 {
+    font-size: px-to-rem(16px);
+    line-height: px-to-rem(24px);
+    font-weight: map.get($font-weight-values, regular);
+    letter-spacing: get-letter-spacing_(0.5, 1);
+    text-decoration: inherit;
+    text-transform: inherit;
+}
+
+@mixin body2 {
+    font-size: px-to-rem(14px);
+    line-height: px-to-rem(20px);
+    font-weight: map.get($font-weight-values, regular);
+    letter-spacing: get-letter-spacing_(0.25, 0.875);
+    text-decoration: inherit;
+    text-transform: inherit;
+}
+
+@function is-typography-style($style) {
+    @return map.has-key($styles, $style);
+}
+
+@function get-typography-styles() {
+    @return map.keys($styles);
+}
+
+@function get-font($typography) {
+    @return map.get($styles, $typography, font-family);
+}
