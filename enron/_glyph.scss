@@ -19,10 +19,41 @@ $double-dagger  : "\2021";
 // --- Latin Extended-A
 // --- Latin Extended-B
 // --- Spacing Modifier Letters
+
 // --- Greek
+$alpha  : "\0391";
+$beta   : "\0392";
+$gamma  : "\0393";
+$epsilon: "\0395";
+$zeta   : "\0396";
+$eta    : "\0397";
+$teta   : "\0398";
+$iota   : "\0399";
+$kappa  : "\039a";
+$lambda : "\039b";
+$mu     : "\039c";
+$nu     : "\039d";
+$xi     : "\039e";
+$omicron: "\039f";
+$pi     : "\03c0";
+$rho    : "\03a1";
+//there is no Sigmaf,
+$sigma   : "\03a3";
+//...
+
 // --- Punctuation
+//..
+
 // --- General Punctuation
+$bull    : "\2022";
+$hellip  : "\2026";
+$prime   : "\2032";
+$Prime   : "\2033";
+$oline   : "\203E";
+$frasl   : "\2044";
+
 // --- Letterlike Symbols
+//..
 
 // --- Arrows
 $leftwards-arrow    : "\2190";
@@ -30,17 +61,14 @@ $upwards-arrow      : "\2191";
 $rightwards-arrow   : "\2192";
 $downwards-arrow    : "\2193";
 $leftright-arrow    : "\2194";
-
 $downwards-arrow-with-corner-leftwards: "\21B5";
 $carriage_return: $downwards-arrow-with-corner-leftwards;
 $is-implied-by: "\21D0";
-
 $leftwards-double-arrow : "\21D0";
 $upwards-double-arrow   : "\21D1";
 $rightwards-double-arrow: "\21D2";
 $downwards-double-arrow : "\21D3";
 $leftright-double-arrow : "\21D4";
-
 
 // --- Mathematical Operators
 // --- Miscellaneous Technical
