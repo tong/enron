@@ -1,0 +1,48 @@
+/* --- ENRON/GLYPH --- */
+
+//TODO: https://css-tricks.com/snippets/html/glyphs/
+
+// --- Special Characters
+$ampersand		: "\0026"; // &
+$quotation-mark	: "\0022"; // "
+$less-than		: "\003c"; // <
+$greater-than	: "\003e"; // >
+
+// --- Latin-1
+$no-break-space : "\00a0"; 
+//..
+$copyright-sign : "\00a9"; 
+//..
+$dagger         : "\2020"; 
+$double-dagger  : "\2021"; 
+
+// --- Latin Extended-A
+// --- Latin Extended-B
+// --- Spacing Modifier Letters
+// --- Greek
+// --- Punctuation
+// --- General Punctuation
+// --- Letterlike Symbols
+
+// --- Arrows
+$leftwards-arrow    : "\2190";
+$upwards-arrow      : "\2191";
+$rightwards-arrow   : "\2192";
+$downwards-arrow    : "\2193";
+$leftright-arrow    : "\2194";
+
+$downwards-arrow-with-corner-leftwards: "\21B5";
+$carriage_return: $downwards-arrow-with-corner-leftwards;
+$is-implied-by: "\21D0";
+
+$leftwards-double-arrow : "\21D0";
+$upwards-double-arrow   : "\21D1";
+$rightwards-double-arrow: "\21D2";
+$downwards-double-arrow : "\21D3";
+$leftright-double-arrow : "\21D4";
+
+
+// --- Mathematical Operators
+// --- Miscellaneous Technical
+// --- Geometric Shapes
+// --- Miscellaneous Symbols
