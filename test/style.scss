@@ -3,15 +3,21 @@
 @use 'enron/filter' as *;
 @use 'enron/glyph';
 @use 'enron/link-effect';
+@use 'enron/typography';
 @use 'enron/z-index';
 
+@include animation.bounce_in;
+@include animation.fade_in;
+@include animation.fade_out;
+@include animation.slide_in_right;
+
 body {
-    //z-index: $z-max;
     margin: 0;
     height: 100%;
     //@include z-10;
     //@include blur();
     //@include brightness();
+    @include typography.body1;
 }
 
 h1 {
@@ -22,16 +28,6 @@ ol {
     list-style: none;
     margin: 0;
     padding: 0;
-}
-
-.bounce_in {
-    @include animation.bounce_in;
-}
-.fade_in {
-    @include animation.fade_in;
-}
-.slide_in_right {
-    @include animation.slide_in_right;
 }
 
 main {
@@ -53,15 +49,23 @@ main {
 
         &[data-id="animation"] {
             > .animation {
-                padding: 2rem;
-                width: 50px;
-                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                &::after {
+                    content: attr(data-name);
+                    text-align: center;
+                }
+                width: 8rem;
+                height: 8rem;
+                margin: 1rem;
                 background: black;
                 color: white;
-                animation: 1s infinite;
-                // &.bounce_in { animation-name: bounce_in; }
-                // &.fade_in { animation-name: fade_in; }
-                // &.slide_in_right { animation-name: slide_in_right; }
+                animation: 2s infinite;
+                &[data-name="bounce_in"] { animation-name: bounce_in; }
+                &[data-name="fade_in"] { animation-name: fade_in; }
+                &[data-name="fade_out"] { animation-name: fade_out; }
+                &[data-name="slide_in_right"] { animation-name: slide_in_right; }
             }
         }
         &[data-id="glyphs"] {
@@ -79,10 +83,10 @@ main {
         &[data-id="filter"] {
             background: red;
         }
-        &[data-id="link-effects"] {
+       /*  &[data-id="link-effects"] {
             > div {
                 padding: 1rem 0;
             }
-        }
+        } */
     }
 }

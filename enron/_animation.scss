@@ -29,11 +29,17 @@
 	}
 }
 
-@mixin fade_in {
+@mixin fade($from:0, $to: 1) {
     @keyframes fade_in {
-        from { opacity: 0; }
-        100% { opacity: 1; }
+        from { opacity: $from; }
+        100% { opacity: $to; }
     }
+}
+@mixin fade_in($from:0, $to: 1) {
+    @include fade($from, $to);
+}
+@mixin fade_out($from:1, $to: 0) {
+	@include fade($from, $to);
 }
 
 @mixin slide_in_right {
