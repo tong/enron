@@ -23,3 +23,10 @@
   background-size: $distance $distance, $distance $distance, 100% 0px, $distance $distance, $distance $distance;
   background-position: $distance/2 $distance/2, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
 }
+
+@mixin grid($size: 1rem, $color: black, $thick: 1px) {
+  background-size: $size $size;
+  background-image:
+      linear-gradient(to right, $color $thick, transparent 1px),
+      linear-gradient(to bottom, $color $thick, transparent 1px);
+}
