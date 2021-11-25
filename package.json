@@ -2,25 +2,25 @@
   "name": "enron",
   "version": "0.0.0",
   "description": "S/CSS library",
-  "main": "enron/index.scss",
-  "private": false,
+  "main": "index.scss",
+  "private": true,
   "scripts": {
-    "test": "echo \"No test specified\" && exit 1",
-    "dev": "sass enron/index.scss enron.css --watch",
-    "build": "sass enron/index.scss enron.css",
-    "clean": "rm -f enron.css*"
+    "test": "npm run build",
+    "dev": "sass index.scss index.css --watch",
+    "build": "sass index.scss index.css --no-source-map",
+    "clean": "rm -f index.css*"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tong/enron-s.git"
+    "url": "git+https://github.com/tong/enron.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tong/enron-s/issues"
+    "url": "https://github.com/tong/enron/issues"
   },
-  "homepage": "https://github.com/tong/enron-s#readme",
+  "homepage": "https://github.com/tong/enron#readme",
   "devDependencies": {
-    "sass": "^1.34.1"
+    "sass": "^1.43.4"
   }
 }

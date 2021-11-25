@@ -1,4 +1,2 @@
-
-Enron-S
-=======
-> S/CSS library
+# Enron
+Zero cost s/css library

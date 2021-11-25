@@ -1,71 +1,739 @@
-/* --- ENRON/GLYPH --- */
-
+/* --- ENRON/GLYPH -------- */
 //TODO: https://css-tricks.com/snippets/html/glyphs/
 
 // --- Special Characters
-$ampersand		: "\0026"; // &
-$quotation-mark	: "\0022"; // "
-$less-than		: "\003c"; // <
-$greater-than	: "\003e"; // >
+$ampersand: "\0026"; // &
+$quotation-mark: "\0022"; // "
+$less-than: "\003c"; // <
+$greater-than: "\003e"; // >
 
 // --- Latin-1
-$no-break-space : "\00a0"; 
-//..
-$copyright-sign : "\00a9"; 
-//..
-$dagger         : "\2020"; 
-$double-dagger  : "\2021"; 
+$no-break-space : "\00a0";
+$inverted_exclamation : "\00a1";
 
-// --- Latin Extended-A
-// --- Latin Extended-B
+// &nbsp;	 	&#160;	no-break space	%A0	p:before { content:”
+// \00a0
+
+// inverted exclamation mark
+// &iexcl;
+// ¡
+// &#161
+// \240
+$inverted_exclamation_mark: "\00a1";
+
+// &cent;
+// cent sign
+// ¢
+// &#162
+// \241
+$_sign: "\00a2";
+
+// pound sterling sign
+// &pound;
+// £
+// &#163
+// \242
+$pound_sterling_sign: "\00a3";
+
+// general currency sign
+// &curren;
+// ¤
+// &#164
+// \243
+$general_currency_sign: "\00a4";
+
+// yen sign
+// &yen;
+// ¥
+// &#165
+// \244
+$yen_sign: "\00a5";
+
+// broken (vertical)
+// &brvbar;
+// ¦
+// &#166
+// \245
+$broken_vertical: "\00a6";
+
+// section sign
+// &sect;
+// §
+// &#167
+// \246
+$_sign: "\00a7";
+
+// umlaut (dieresis)
+// &uml;
+// ¨
+// &#168
+// \247
+$umlaut: "\00a8";
+
+// copyright sign
+// &copy;
+// ©
+// &#169
+// \250
+$_sign: "\00a9";
+
+// ordinal indicator, femi
+// &ordf;
+// ª
+// &#170
+// \251
+$ordinal_indicator: "\00aa";
+
+// angle quotation
+// &laquo;
+// «
+// &#171
+// \252
+$angle_quotation: "\00ab";
+
+// not sign
+// &not;
+// ¬
+// &#172
+// \253
+$not_sign: "\00ac";
+
+// soft hyphen
+// &shy;
+// ­
+// &#173
+// \254
+$soft_hyphen: "\00ad";
+
+// &reg;
+// registered sign
+// ®
+// &#174
+// \255
+$registered_sign: "\00ae";
+
+// macron
+// &macr;
+// ¯
+// &#175
+// \256
+$macron: "\00af";
+
+// degree sign
+// &deg;
+// °
+// &#176
+// \257
+$degree_sign: "\00b0";
+
+// plus-or-minus 
+// &plusmn;
+// ±
+// &#177
+// \260
+$plus_or-minus: "\00b1";
+
+// superscript two
+// &sup2;
+// ²
+// &#178
+// \261
+$superscript_two: "\00b2";
+
+// superscript three
+// &sup3;
+// ³
+// &#179
+// \262
+$superscript_three: "\00b3";
+
+// acute accent
+// &acute;
+// ´
+// &#180
+// \263
+$acute_accent: "\00b4";
+
+// micro sign
+// &micro;
+// µ
+// &#181
+// \264
+$micro_sign: "\00b5";
+
+// pilcrow (paragraph)
+// &para;
+// ¶
+// &#182
+// \265
+$pilcrow_paragraph: "\00b6";
+
+// middle dot
+// &middot;
+// ·
+// &#183
+// \266
+$middle_dot: "\00b7";
+
+// cedilla
+// &cedil;
+// ¸
+// &#184
+// \267
+$cedilla: "\00b8";
+
+// superscript one
+// &sup1;
+// ¹
+// &#185
+// \270
+$_one: "\00b9";
+
+// ordinal indicator, mascu
+// &ordm;
+// º
+// &#186
+// \271
+$ordinal_indicator: "\00ba";
+
+// &raquo;
+// angle quotation
+// »
+// &#187
+// \272
+$angle_quotation: "\00bb";
+
+// &frac14;
+// fraction one-quarter
+// ¼
+// &#188
+// \273
+$_one-quarter: "\00bc";
+
+// &frac12;
+// fraction one-half
+// ½
+// &#189
+// \274
+$_one-half: "\00bd";
+
+// &frac34;
+// fraction three-quarters
+// ¾
+// &#190
+// \275
+$_three-quarters: "\00be";
+
+// inverted question mark
+// &iquest;
+// ¿
+// &#191
+// \276
+$inverted_question_mark: "\00bf";
+
+//TODO
+
+// // capital A, g
+// // &Agrave;
+// // À
+// // &#192
+// // \277
+// $_A: "\00c0";
+
+// // &Aacute;
+// // capital A, a
+// // Á
+// // &#193
+// // \300
+// $_A,: "\00c1";
+
+// // &Acirc;
+// // capital A, circum
+// // Â
+// // &#194
+// // \301
+// $_A,: "\00c2";
+
+// // &Atilde;
+// // capital A, t
+// // Ã
+// // &#195
+// // \302
+// $_A,: "\00c3";
+
+// // &Auml;
+// // capital A, dier
+// // Ä
+// // &#196
+// // \303
+// $_A,: "\00c4";
+
+// // &Aring;
+// // capital A, 
+// // Å
+// // &#197
+// // \304
+// $ _A,: "\00c5";
+
+// &AElig;
+// capital AE diphthong (liga
+// Æ
+// &#198
+// \305
+$capital_AE_diphthong: "\00c6";
+
+// &Ccedil;
+// capital C, ced
+// Ç
+// &#199
+// \306
+$_C: "\00c7";
+
+// capital E, g
+// &Egrave;
+// È
+// &#200
+// \307
+$_E: "\00c8";
+
+// capital E, a
+// &Eacute;
+// É
+// &#201
+// \310
+$_E: "\00c9";
+
+// capital E, circum
+// &Ecirc;
+// Ê
+// &#202
+// \311
+$_E: "\00ca";
+
+// capital E, dier
+// &Euml;
+// Ë
+// &#203
+// \312
+$_E: "\00cb";
+
+// capital I, g
+// &Igrave;
+// Ì
+// &#204
+// \313
+$_I: "\00cc";
+
+// capital I, a
+// &Iacute;
+// Í
+// &#205
+// \314
+$_I: "\00cd";
+
+// capital I, circum
+// &Icirc;
+// Î
+// &#206
+// \315
+$_I: "\00ce";
+
+// capital I, dier
+// &Iuml;
+// Ï
+// &#207
+// \316
+$_I: "\00cf";
+
+// capital Eth, Icela
+// &ETH;
+// Ð
+// &#208
+// \317
+$_Eth: "\00d0";
+
+// capital N, t
+// &Ntilde;
+// Ñ
+// &#209
+// \320
+$_N: "\00d1";
+
+// capital O, g
+// &Ograve;
+// Ò
+// &#210
+// \321
+$_O: "\00d2";
+
+// capital O, a
+// &Oacute;
+// Ó
+// &#211
+// \322
+$_O: "\00d3";
+
+// &Ocirc;
+// capital O, circum
+// Ô
+// &#212
+// \323
+$_O: "\00d4";
+
+// capital O, t
+// &Otilde;
+// Õ
+// &#213
+// \324
+$_O: "\00d5";
+
+// capital O, dier
+// &Ouml;
+// Ö
+// &#214
+// \325
+$_O: "\00d6";
+
+// multiply sign
+// times;
+// ×
+// &#215
+// \326
+$multiply_sign: "\00d7";
+// }	alert(“\327”);
+
+// ccapital O, slash
+// &Os
+// 
+// 0
+// d8
+$_U: "\00d9";
+
+// capital U, grave accent
+// &Ugrave;
+// Ù
+// &#217
+// \330
+$_U: "\00d9";
+
+// capital U, acute accent
+// &Uacute;
+// Ú
+// &#218
+// \331
+$_U: "\00da";
+
+// capital U, circumflex accent
+// &Ucirc;
+// Û
+// &#219
+// \332
+$_U: "\00db";
+
+//	capital U, dieresis or umlaut mark
+// &Uuml;
+// Ü
+// &#220
+// \333
+$_U: "\00dc";
+
+// capital Y, a
+// &Yacute;
+// Ý
+// &#221
+// \334
+$_Y: "\00dd";
+
+// capital THORN, Icelandic
+// &THORN;
+// Þ
+// &#222
+// \335
+$_THORN: "\00de";
+
+// small shar
+// &szlig;
+// ß
+// &#223
+// \336
+// "\0$_shar
+//: 0df";
+
+// small sharp s, German (sz ligature)
+// &agrave;
+// à
+// &#224
+// \337
+$_a: "\00e0";
+
+// small a, grave accent
+// &aacute;
+// á
+// &#225
+// \340
+$_a: "\00e1";
+
+// small a, acute accent
+// &acirc;
+// â
+// &#226
+// \341
+$_a: "\00e2";
+
+// small a, tilde
+// &atilde;
+// ã
+// &#227
+// \342
+$_a: "\00e3";
+
+// small a, dieresis or umlaut mark
+// &auml;
+// ä
+// &#228
+// \343
+$_a: "\00e4";
+
+// small a, ring
+// &aring;
+// å
+// &#229
+// \344
+$_a: "\00e5";
+
+// small ae diphthong (ligature)
+// &aelig;
+// æ
+// &#230
+// \345
+$small_ae_diphthong: "\00e6";
+
+// small c, cedilla
+// &ccedil;
+// ç
+// &#231
+// \346
+$_c: "\00e7";
+
+// small e, grave accent
+// &egrave;
+// è
+// &#232
+// \347
+$_e: "\00e8";
+
+// small e, acute accent
+// &eacute;
+// é
+// &#233
+// \350
+$_e: "\00e9";
+
+// small e, circumflex accent
+// &ecirc;
+// ê
+// &#234
+// \351
+$_e: "\00ea";
+
+// small e, dieresis or umlaut mark
+// &euml;
+// ë
+// &#235
+// \352
+$_e: "\00eb";
+
+// small i, grave accent
+// &igrave;
+// ì
+// &#236
+// \353
+$_i: "\00ec";
+
+// small i, acute accent
+// &iacute;
+// í
+// &#237
+// \354
+$_i: "\00ed";
+
+// small i, circumflex accent
+// &icirc;
+// î
+// &#238
+// \355
+$_i: "\00ee";
+
+// small i, dieresis or umlaut mark
+// &iuml;
+// ï
+// &#239
+// \356
+$_i: "\00ef";
+
+// small eth, Icelandic
+// &eth;
+// ð
+// &#240
+// \357
+$_eth: "\00f0";
+
+// small n, tilde
+// &ntilde;
+// ñ
+// &#241
+// \360
+$_n: "\00f1";
+
+// small o, grave accent
+// &ograve;
+// ò
+// &#242
+// \361
+$_o: "\00f2";
+
+// small o, acute accent
+// &oacute;
+// ó
+// &#243
+// \362
+$small_o: "\00f3";
+
+// small o, circum
+// &ocirc;
+// ô
+// &#244
+// \363
+$small_o: "\00f4";
+
+// small o, tilde
+// &otilde;
+// õ
+// &#245
+// \364
+$small_o: "\00f5";
+
+// small o, dieresis or umlaut mark
+// &ouml;
+// ö
+// &#246
+// \365
+$small_o: "\00f6";
+
+// divide sign
+// &divide;
+// ÷
+// &#247
+// \366
+$divide_sign: "\00f7";
+
+// small o, slash
+// &oslash;
+// ø
+// &#248
+// \367
+$_o: "\00f8";
+
+// &ugrave;
+//	small u, grave accent
+// ù
+// &#249
+// \370
+$_u: "\00f9";
+
+// &uacute;
+// small u, acute accent
+// ú
+// &#250
+// \371
+$_u: "\00fa";
+
+// small u, circumflex accentm
+// &ucirc;
+// û
+// &#251
+// \372
+$_u: "\00fb";
+
+// small u, dieresis or umlaut mark
+// &uuml;
+// ü
+// &#252
+// \373
+$_u: "\00fc";
+
+// small y, acute accent
+// &yacute;
+// ý
+// &#253
+// \374
+$_y: "\00fd";
+
+// &thorn;
+// small thorn, Icelandic
+// þ
+// &#254
+// \375
+$_thorn: "\00fe";
+
+// &yuml;
+// small y, dieresis or umlaut mark
+// ÿ
+// &#255
+// \377”
+$_y: "\00ff";
+
+
+
+//: --- Latin Extended-B
 // --- Spacing Modifier Letters
 
 // --- Greek
-$alpha  : "\0391";
-$beta   : "\0392";
-$gamma  : "\0393";
+$alpha : "\0391";
+$beta : "\0392";
+$gamma : "\0393";
 $epsilon: "\0395";
-$zeta   : "\0396";
-$eta    : "\0397";
-$teta   : "\0398";
-$iota   : "\0399";
-$kappa  : "\039a";
+$zeta : "\0396";
+$eta : "\0397";
+$teta : "\0398";
+$iota : "\0399";
+$kappa : "\039a";
 $lambda : "\039b";
-$mu     : "\039c";
-$nu     : "\039d";
-$xi     : "\039e";
+$mu : "\039c";
+$nu : "\039d";
+$xi : "\039e";
 $omicron: "\039f";
-$pi     : "\03c0";
-$rho    : "\03a1";
+$pi : "\03c0";
+$rho : "\03a1";
 //there is no Sigmaf,
-$sigma   : "\03a3";
+$sigma : "\03a3";
 //...
 
 // --- Punctuation
 //..
 
 // --- General Punctuation
-$bull    : "\2022";
-$hellip  : "\2026";
-$prime   : "\2032";
-$Prime   : "\2033";
-$oline   : "\203E";
-$frasl   : "\2044";
+$bull : "\2022";
+$hellip : "\2026";
+$prime : "\2032";
+$Prime : "\2033";
+$oline : "\203E";
+$frasl : "\2044";
 
 // --- Letterlike Symbols
 //..
 
 // --- Arrows
-$leftwards-arrow    : "\2190";
-$upwards-arrow      : "\2191";
-$rightwards-arrow   : "\2192";
-$downwards-arrow    : "\2193";
-$leftright-arrow    : "\2194";
+$leftwards-arrow : "\2190";
+$upwards-arrow : "\2191";
+$rightwards-arrow : "\2192";
+$downwards-arrow : "\2193";
+$leftright-arrow : "\2194";
 $downwards-arrow-with-corner-leftwards: "\21B5";
 $carriage_return: $downwards-arrow-with-corner-leftwards;
 $is-implied-by: "\21D0";
 $leftwards-double-arrow : "\21D0";
-$upwards-double-arrow   : "\21D1";
+$upwards-double-arrow : "\21D1";
 $rightwards-double-arrow: "\21D2";
 $downwards-double-arrow : "\21D3";
 $leftright-double-arrow : "\21D4";

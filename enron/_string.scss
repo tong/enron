@@ -1,4 +1,4 @@
-/* --- ENRON/STRING --- */
+/* --- ENRON/STRING ------- */
 
 @function replace($string, $search, $replace: "") {
   $index: str-index($string, $search);

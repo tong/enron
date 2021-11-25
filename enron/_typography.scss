@@ -2,8 +2,6 @@
 @use 'sass:map';
 @use 'sass:string';
 
-//TODO https://github.com/material-components/material-components-web/blob/master/packages/mdc-typography/_typography.scss
-
 $font-family: string.unquote('Roboto, sans-serif') !default;
 
 $font-weight-values: (thin: 100,
