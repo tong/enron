@@ -1,0 +1,61 @@
+/* --- enron/patterns -------- */
+
+@mixin checks($size:1rem) {
+    background-image: repeating-linear-gradient(45deg, currentColor 25%, transparent 25%, transparent 75%, currentColor 75%, currentColor), repeating-linear-gradient(45deg, currentColor 25%, transparent 25%, transparent 75%, currentColor 75%, currentColor);
+    background-position: 0 0, $size $size;
+    background-size: calc(2 * $size) calc(2 * $size);
+}
+
+@mixin dots($spacing: 1rem) {
+    background-image: radial-gradient(currentColor 1px, transparent 1px);
+    background-size: calc($spacing * 1) calc($spacing * 1);
+}
+
+@mixin grid($size:1rem) {
+    background-image: linear-gradient(currentColor 1px, transparent 1px), linear-gradient(to right, currentColor 1px, transparent 1px);
+    background-size: $size $size;
+}
+
+@mixin lines($spacing:1rem, $thick:1px) {
+    background-image: repeating-linear-gradient(to right, currentColor, currentColor $thick, transparent $thick, transparent);
+    background-size: $spacing $spacing;
+}
+
+@mixin lines-horizontal($spacing:1rem, $thick:1px) {
+    background-image: repeating-linear-gradient(0deg, currentColor, currentColor $thick, transparent $thick, transparent);
+    background-size: $spacing $spacing;
+}
+
+@mixin lines-diagonal($spacing:1rem, $thick:1px) {
+    background-image: repeating-linear-gradient(45deg, currentColor 0, currentColor $thick, transparent 0, transparent 50%);
+    background-size: $spacing $spacing;
+}
+
+@mixin lines-vertical($spacing:1rem, $thick:1px) {
+    background-image: repeating-linear-gradient(to right, currentColor, currentColor $thick, transparent $thick, transparent);
+    background-size: $spacing $spacing;
+}
+
+@mixin stripes-vertical($spacing:1rem) {
+    background-image: linear-gradient(90deg, transparent 50%, currentColor 50%);
+    background-size: $spacing $spacing;
+}
+
+@mixin stripes-horizontal($spacing:1rem) {
+    background-image: linear-gradient(0deg, transparent 50%, currentColor 50%);
+    background-size: $spacing $spacing;
+}
+
+@mixin stripes-diagonal($spacing:1rem) {
+    background: repeating-linear-gradient(45deg, transparent, transparent $spacing, currentColor $spacing, currentColor calc(2 * $spacing));
+}
+
+@mixin triangles($size:1rem) {
+    background-image: linear-gradient(45deg, currentColor 50%, transparent 50%);
+    background-size: $size $size;
+}
+
+@mixin zigzag($amount:1rem) {
+    background: linear-gradient(135deg, currentColor 25%, transparent 25%) -$amount 0, linear-gradient(225deg, currentColor 25%, transparent 25%) -$amount 0, linear-gradient(315deg, currentColor 25%, transparent 25%), linear-gradient(45deg, currentColor 25%, transparent 25%);
+    background-size: calc(2 * $amount) calc(2 * $amount);
+}

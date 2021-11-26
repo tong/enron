@@ -16,4 +16,4 @@ jobs:
       - name: Build
         run: npm run build
       - name: Result
-        run: cat enron.css
+        run: cat index.css
