@@ -1,0 +1,82 @@
+
+// --- Fade in
+
+@mixin in($from:0, $to: 1) {
+    @keyframes fade_in {
+        from {
+            opacity: $from;
+        }
+
+        100% {
+            opacity: $to;
+        }
+    }
+}
+
+@mixin in_down($from:0, $to: 1, $offset:-100%) {
+    @keyframes fade_in_down {
+        from {
+            opacity: $from;
+            transform: translate3d(0, $offset, 0);
+        }
+
+        100% {
+            opacity: $to;
+            transform: none;
+        }
+    }
+}
+
+@mixin in_up($from:0, $to: 1, $offset:100%) {
+    @keyframes fade_in_up {
+        from {
+            opacity: $from;
+            transform: translate3d(0, $offset, 0);
+        }
+
+        100% {
+            opacity: $to;
+            transform: none;
+        }
+    }
+}
+
+@mixin in_left($from:0, $to: 1, $offset:100%) {
+    @keyframes fade_in_left {
+        from {
+            opacity: $from;
+            transform: translate3d(-$offset, 0, 0);
+        }
+        100% {
+            opacity: $to;
+            transform: none;
+        }
+    }
+}
+
+@mixin in_right($from:0, $to: 1, $offset:100%) {
+    @keyframes fade_in_right {
+        from {
+            opacity: $from;
+            transform: translate3d($offset, 0, 0);
+        }
+        100% {
+            opacity: $to;
+            transform: none;
+        }
+    }
+}
+
+// --- Fade out
+
+@mixin out($from:1, $to: 0) {
+    @keyframes fade_out {
+        from {
+            opacity: $from;
+        }
+
+        100% {
+            opacity: $to;
+        }
+    }
+}

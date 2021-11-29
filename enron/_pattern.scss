@@ -26,9 +26,17 @@
     background-size: $spacing $spacing;
 }
 
-@mixin lines-diagonal($spacing:1rem, $thick:1px) {
-    background-image: repeating-linear-gradient(45deg, currentColor 0, currentColor $thick, transparent 0, transparent 50%);
+@mixin -lines-diagonal($spacing:1rem, $thick:1px, $rotation:45deg) {
+    background-image: repeating-linear-gradient($rotation, currentColor 0, currentColor $thick, transparent 0, transparent 50%);
     background-size: $spacing $spacing;
+}
+
+@mixin lines-diagonal-1($spacing:1rem, $thick:1px) {
+    @include lines-diagonal($spacing, $thick, 45deg)
+}
+
+@mixin lines-diagonal-2($spacing:1rem, $thick:1px) {
+    @include lines-diagonal($spacing, $thick, -45deg)
 }
 
 @mixin lines-vertical($spacing:1rem, $thick:1px) {

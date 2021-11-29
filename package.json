@@ -7,6 +7,7 @@
   "scripts": {
     "test": "npm run build",
     "dev": "sass index.scss index.css --watch",
+    "build:example": "sass test.scss test.css",
     "build": "sass index.scss index.css --no-source-map",
     "clean": "rm -f index.css*"
   },
