@@ -1,0 +1,156 @@
+@use 'enron/animation/fade';
+@use 'enron/animation/attention';
+@use 'enron/animation/bounce';
+//@use 'enron/elevate' as *;
+@use 'enron/effect/filmgrain';
+@use 'enron/filter' as *;
+@use 'enron/glyph';
+@use 'enron/link';
+@use 'enron/typography';
+@use 'enron/z-index';
+
+// @include animation.bounce_in;
+// @include animation.fade_in;
+@include fade.in_down;
+// @include animation.fade_out;
+// @include animation.slide_in_right;
+
+@include attention.flash();
+@include attention.jello();
+@include attention.pulse();
+@include attention.rubber_band();
+@include attention.shake();
+@include attention.swing();
+@include attention.tada();
+@include attention.wobble();
+@include bounce.in();
+@include bounce.in_up();
+@include bounce.in_down();
+@include bounce.in_left();
+@include bounce.in_right();
+@include fade.in();
+@include fade.in_down();
+@include fade.in_up();
+@include fade.in_left();
+@include fade.in_right();
+@include fade.out();
+
+:root {
+    --animation-duration: 2s;
+}
+
+/* @mixin ani($name) {
+    animation-name: $name;
+    @include animation.$name;
+} */
+
+body {
+    margin: 0;
+    height: 100%;
+    //@include z-10;
+    //@include blur();
+    //@include brightness();
+    @include typography.body1;
+}
+
+h1 {
+    //@include elevate-4;
+}
+
+ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    > section {
+        margin: 1rem;
+        padding: 1rem 1rem 1rem 1rem;
+        border: 1px solid black;
+        &::before {
+            content: attr(data-id);
+            font-size: 75%;
+            text-transform: uppercase;
+        }
+        &[data-id="animation"] {
+            > section::before {
+                content: attr(data-type);
+            }
+            .animation {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                /* &::after {
+                    content: attr(data-name);
+                    text-align: center;
+                } */
+                width: 12rem;
+                height: 4;
+                margin: 1rem;
+                background: black;
+                color: white;
+                animation: var(--animation-duration) infinite;
+                
+                &.attention_flash { animation-name: attention_flash; }
+                &.attention_jello { animation-name: attention_jello; }
+                &.attention_pulse { animation-name: attention_pulse; }
+                &.attention_rubber_band { animation-name: attention_rubber_band; }
+                &.attention_shake { animation-name: attention_shake; }
+                &.attention_swing { animation-name: attention_swing; }
+                &.attention_tada { animation-name: attention_tada; }
+                &.attention_wobble { animation-name: attention_wobble; }
+                &.bounce_in { animation-name: bounce_in; }
+                &.bounce_in_down { animation-name: bounce_in_down; }
+                &.bounce_in_up { animation-name: bounce_in_up; }
+                &.bounce_in_left { animation-name: bounce_in_left; }
+                &.bounce_in_right { animation-name: bounce_in_right; }
+                &.fade_in { animation-name: fade_in; }
+                &.fade_in_down { animation-name: fade_in_down; }
+                &.fade_in_up { animation-name: fade_in_up; }
+                &.fade_in_left { animation-name: fade_in_left; }
+                &.fade_in_right { animation-name: fade_in_right; }
+                &.fade_out { animation-name: fade_out; }
+
+            }
+        }
+        &[data-id="glyphs"] {
+            > ol {
+                &::before {
+                    content: attr(data-glyph-group);
+                }
+            }
+            [data-glyph="ampersand"]:before { content: glyph.$ampersand; }
+            [data-glyph="leftwards-arrow"]:before { content: glyph.$leftwards-arrow; }
+            [data-glyph="upwards-arrow"]:before { content: glyph.$upwards-arrow; }
+            [data-glyph="rightwards-arrow"]:before { content: glyph.$rightwards-arrow; }
+            [data-glyph="downwards-arrow"]:before { content: glyph.$downwards-arrow; }
+        }
+        &[data-id="filter"] {
+            // background: red;
+        }
+        &[data-id="effects"] {
+            > * {
+                width: 100px;
+                height: 100px;
+            }
+            [data-effect="filmgrain"] {
+                @include filmgrain.filmgrain();
+            }
+        }
+        &[data-id="links"] {
+            color: #000;
+            a {
+                display: table;
+                padding: 1rem 0;
+                color: #000;
+                &.link-effect-4 {
+                    @include link.effect-4(#0000ff,5px,0.3em);
+                }
+                &.link-effect-21 {
+                    @include link.effect-21();
+                }
+            }
+        }
+    }
+}
