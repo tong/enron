@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/tong/enron#readme",
   "devDependencies": {
-    "sass": "^1.43.4"
+    "sass": "^1.43.5"
   }
 }

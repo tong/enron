@@ -1,0 +1,61 @@
+/* --- ENRON/LINK --------- */
+
+// --- Effect 4
+
+@mixin effect-4($color:currentColor, $bar_height:1px, $offset:0.5em, $duration:0.3s) {
+  &::after {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    content: '';
+    background: $color;
+    opacity: 0;
+    transition: height $duration, opacity $duration, transform $duration;
+    transform: translateY($offset);
+  }
+
+  &:hover::after,
+  &:focus::after {
+    height: $bar_height;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// --- Effect 21
+
+@mixin effect-21($color:currentColor, $bar_height:1px, $offset:0.5em, $duration:0.3s) {
+
+  &::before,
+  &::after {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: $bar_height;
+    background: $color;
+    content: '';
+    opacity: 0;
+    transition: opacity $duration, transform $duration;
+    transform: translateY(-$offset);
+  }
+
+  &::before {
+    top: 0;
+    transform: translateY(-$offset);
+  }
+
+  &::after {
+    bottom: 0;
+    transform: translateY($offset);
+  }
+
+  &:hover::before,
+  &:focus::before,
+  &:hover::after,
+  &:focus::after {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
