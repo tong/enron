@@ -3,9 +3,13 @@
 @use 'sass:map';
 @use 'sass:string';
 
-$font-family: string.unquote('Roboto, sans-serif') !default;
-
-$font-weight-values: (thin: 100,
+// $basesize: 16 !default;
+// $basesize_px: $basesize * 1px;
+// @debug $basesize;
+// @debug $basesize_px;
+$font-family: string.unquote('serif') !default;
+$font-weight-values: (
+    thin: 100,
     light: 300,
     regular: 400,
     medium: 500,
@@ -13,17 +17,38 @@ $font-weight-values: (thin: 100,
     black: 900,
 ) !default;
 
-@function get-letter-spacing_($tracking, $font-size) {
-    @return math.div($tracking, ($font-size * 16)) * 1em;
+@function get-letter-spacing_($tracking, $size) {
+    // @return math.div($tracking, ($font-size * 16)) * 1em;
+    @return math.div($tracking, ($size * 16)) * 1em;
 }
 
 @function px-to-rem($px) {
+    @if $px == null {
+        @return null;
+    }
+    @if not math.compatible($px, 1px) {
+        // Value is something other than px, use as-is.
+        @return $px;
+    }
     @return math.div($px, 16px) * 1rem;
 }
 
+/* @function is-typography-style($style) {
+    @return map.has-key($styles, $style);
+}
+
+@function get-typography-styles() {
+    @return map.keys($styles);
+}
+
+@function get-font($typography) {
+    @return map.get($styles, $typography, font-family);
+} */
+
+/* 
 @mixin body1 {
-    font-size: px-to-rem(16px);
-    line-height: px-to-rem(24px);
+    font-size: px-to-rem($basesize);
+    // line-height: px-to-rem(24);
     font-weight: map.get($font-weight-values, regular);
     letter-spacing: get-letter-spacing_(0.5, 1);
     text-decoration: inherit;
@@ -38,15 +63,4 @@ $font-weight-values: (thin: 100,
     text-decoration: inherit;
     text-transform: inherit;
 }
-
-@function is-typography-style($style) {
-    @return map.has-key($styles, $style);
-}
-
-@function get-typography-styles() {
-    @return map.keys($styles);
-}
-
-@function get-font($typography) {
-    @return map.get($styles, $typography, font-family);
-}
+ */

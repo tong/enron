@@ -1,18 +1,20 @@
-/* --- enron/patterns -------- */
+/* --- ENRON/PATTERNS -------- */
 
-@mixin checks($size:1rem) {
-    background-image: repeating-linear-gradient(45deg, currentColor 25%, transparent 25%, transparent 75%, currentColor 75%, currentColor), repeating-linear-gradient(45deg, currentColor 25%, transparent 25%, transparent 75%, currentColor 75%, currentColor);
+//TODO color param
+
+@mixin checks($size:1rem, $color:currentColor) {
+    background-image: repeating-linear-gradient(45deg, $color 25%, transparent 25%, transparent 75%, $color 75%, $color), repeating-linear-gradient(45deg, $color 25%, transparent 25%, transparent 75%, $color 75%, $color);
     background-position: 0 0, $size $size;
     background-size: calc(2 * $size) calc(2 * $size);
 }
 
-@mixin dots($spacing: 1rem) {
-    background-image: radial-gradient(currentColor 1px, transparent 1px);
+@mixin dots($spacing: 1rem, $color:currentColor) {
+    background-image: radial-gradient($color 1px, transparent 1px);
     background-size: calc($spacing * 1) calc($spacing * 1);
 }
 
-@mixin grid($size:1rem) {
-    background-image: linear-gradient(currentColor 1px, transparent 1px), linear-gradient(to right, currentColor 1px, transparent 1px);
+@mixin grid($size:1rem, $color:currentColor) {
+    background-image: linear-gradient($color 1px, transparent 1px), linear-gradient(to right, $color 1px, transparent 1px);
     background-size: $size $size;
 }
 
