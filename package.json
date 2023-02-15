@@ -1,27 +1,27 @@
 {
-  "name": "enron",
-  "version": "0.0.0",
-  "description": "S/CSS library",
-  "main": "index.scss",
-  "private": true,
-  "scripts": {
-    "test": "npm run build",
-    "dev": "sass index.scss index.css --watch",
-    "build:example": "sass test.scss test.css",
-    "build": "sass index.scss index.css --no-source-map",
-    "clean": "rm -f index.css*"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tong/enron.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tong/enron/issues"
-  },
-  "homepage": "https://github.com/tong/enron#readme",
-  "devDependencies": {
-    "sass": "^1.44.0"
-  }
+    "name": "enron",
+    "version": "0.0.0",
+    "description": "S/CSS library",
+    "main": "index.scss",
+    "private": true,
+    "scripts": {
+        "test": "npm run build",
+        "dev": "sass index.scss index.css --watch",
+        "build:example": "sass test.scss test.css",
+        "build": "sass index.scss index.css --no-source-map",
+        "clean": "rm -f index.css*"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tong/enron.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/tong/enron/issues"
+    },
+    "homepage": "https://github.com/tong/enron#readme",
+    "devDependencies": {
+        "sass": "^1.58.1"
+    }
 }
