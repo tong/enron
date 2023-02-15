@@ -66,6 +66,6 @@
 }
 
 @mixin zigzag($amount:1rem) {
-    background: linear-gradient(135deg, currentColor 25%, transparent 25%) -$amount 0, linear-gradient(225deg, currentColor 25%, transparent 25%) -$amount 0, linear-gradient(315deg, currentColor 25%, transparent 25%), linear-gradient(45deg, currentColor 25%, transparent 25%);
+    background: linear-gradient(135deg, currentColor 25%, transparent 25%) - $amount 0, linear-gradient(225deg, currentColor 25%, transparent 25%) - $amount 0, linear-gradient(315deg, currentColor 25%, transparent 25%), linear-gradient(45deg, currentColor 25%, transparent 25%);
     background-size: calc(2 * $amount) calc(2 * $amount);
 }
