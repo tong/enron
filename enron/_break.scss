@@ -13,8 +13,7 @@ $points: (
         @media #{$logic} and (min-width: map-get($map: $points, $key: $breakpoint)) {
             @content;
         }
-    }
-    @else {
+    } @else {
         @media (min-width: map-get($map: $points, $key: $breakpoint)) {
             @content;
         }
@@ -26,10 +25,22 @@ $points: (
         @media #{$logic} and (max-width: map-get($map: $points, $key: $breakpoint)) {
             @content;
         }
-    }
-    @else {
+    } @else {
         @media (max-width: map-get($map: $points, $key: $breakpoint)) {
             @content;
         }
     }
 }
+
+@mixin minmax($min, $max, $logic: false) {
+    @if($logic) {
+        @media #{$logic} and (min-width: map-get($map: $points, $key: $min)) and (max-width: map-get($map: $points, $key: $max)) {
+            @content;
+        }
+    } @else {
+        @media (min-width: map-get($map: $points, $key: $min)) and (max-width: map-get($map: $points, $key: $max)) {
+            @content;
+        }
+    }
+}
+
