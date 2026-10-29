@@ -1,0 +1,55 @@
+// --- ENRON/FONT
+
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:string';
+@use 'string' as str;
+
+$weight-values: (
+    thin: 100,
+    light: 300,
+    regular: 400,
+    medium: 500,
+    bold: 700,
+    black: 900,
+) !default;
+
+/// Generates a `@font-face` rule for a font available in several formats
+///
+/// @param {String} $name - Font family name
+/// @param {String} $path - Path to the font files, without extension
+/// @param {Number} $weight - Font weight
+/// @param {String} $style - Font style
+/// @param {List} $exts - File extensions, in order of preference
+///
+/// @example scss
+///  @include font.font-face("My Font", "fonts/my-font", 400, normal, woff2 woff);
+///
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+    $src: null;
+    $extmods: (
+        eot: "?",
+        svg: "#" + str.replace($name, " ", "_"),
+    );
+    $formats: (
+        eot: "embedded-opentype",
+        otf: "opentype",
+        ttf: "truetype",
+    );
+
+    @each $ext in $exts {
+        $extmod: $ext;
+        @if map.has-key($extmods, $ext) {
+            $extmod: $ext + map.get($extmods, $ext);
+        }
+        $format: map.get($formats, $ext) or $ext;
+        $src: list.append($src, url(string.quote($path + "." + $extmod)) format(string.quote($format)), comma);
+    }
+
+    @font-face {
+        font-family: string.quote($name);
+        font-style: $style;
+        font-weight: $weight;
+        src: $src;
+    }
+}

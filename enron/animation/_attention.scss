@@ -1,7 +1,7 @@
-/* --- ENRON/ANIMATION/ATTENTION ------ */
+// --- ENRON/ANIMATION/ATTENTION
 
-@mixin flash() {
-    @keyframes attention_flash {
+@mixin flash($name: attention_flash) {
+    @keyframes #{$name} {
 
         from,
         50%,
@@ -16,8 +16,8 @@
     }
 }
 
-@mixin jello() {
-    @keyframes attention_jello {
+@mixin jello($name: attention_jello) {
+    @keyframes #{$name} {
 
         from,
         11.1%,
@@ -55,8 +55,8 @@
     }
 }
 
-@mixin pulse($strength:1.05) {
-    @keyframes attention_pulse {
+@mixin pulse($strength:1.05, $name: attention_pulse) {
+    @keyframes #{$name} {
         from {
             transform: scale3d(1, 1, 1);
         }
@@ -71,8 +71,8 @@
     }
 }
 
-@mixin rubber_band() {
-    @keyframes attention_rubber_band {
+@mixin rubber-band($name: attention_rubber_band) {
+    @keyframes #{$name} {
 
         from {
             transform: scale3d(1, 1, 1);
@@ -105,8 +105,8 @@
 }
 
 
-@mixin shake() {
-    @keyframes attention_shake {
+@mixin shake($name: attention_shake) {
+    @keyframes #{$name} {
 
         from,
         100% {
@@ -130,8 +130,8 @@
     }
 }
 
-@mixin swing() {
-    @keyframes attention_swing {
+@mixin swing($name: attention_swing) {
+    @keyframes #{$name} {
         20% {
             transform: rotate3d(0, 0, 1, 15deg);
         }
@@ -154,8 +154,8 @@
     }
 }
 
-@mixin tada($rotate:3deg) {
-    @keyframes attention_tada {
+@mixin tada($rotate:3deg, $name: attention_tada) {
+    @keyframes #{$name} {
         from {
             transform: scale3d(1, 1, 1);
         }
@@ -184,8 +184,8 @@
     }
 }
 
-@mixin wobble() {
-    @keyframes attention_wobble {
+@mixin wobble($name: attention_wobble) {
+    @keyframes #{$name} {
         from {
             transform: none;
         }

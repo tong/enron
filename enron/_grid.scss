@@ -1,0 +1,9 @@
+// --- ENRON/GRID
+
+// https://www.cssscript.com/golden-ratio-page-layout-css/
+
+@mixin golden-ratio() {
+    grid-template-columns: 61.8% 9.02% 5.58% 23.6%;
+    grid-template-rows: 61.8% 9.02% 5.58% 23.6%;
+    grid-template-areas: "A B B B" "A E F C" "A E G C" "A D D C";
+}

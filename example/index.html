@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>ENRON/S Example</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <header>
+        <h1>ENRON/S</h1>
+        <p>Everything enron provides. Build with <code>npm run build:example</code>.</p>
+        <nav>
+            <a href="#animation">Animation</a>
+            <a href="#effect">Effect</a>
+            <a href="#hamburger">Hamburger</a>
+            <a href="#elevate">Elevate</a>
+            <a href="#filter">Filter</a>
+            <a href="#pattern">Background &amp; Pattern</a>
+            <a href="#ease">Ease</a>
+            <a href="#glyph">Glyph</a>
+            <a href="#break">Break &amp; Media</a>
+            <a href="#layout">Layout, Grid &amp; Z-Index</a>
+            <a href="#typography">Typography</a>
+            <a href="#print">Print</a>
+            <a href="#functions">Functions</a>
+        </nav>
+    </header>
+    <main>
+        <section id="animation">
+            <h2>Animation</h2>
+            <p><code>animation/attention</code>, <code>bounce</code>, <code>fade</code>, <code>flip</code>, <code>hinge</code>, <code>lightspeed</code>, <code>zoom</code>, every keyframe mixin, looped.</p>
+            <div class="tiles" data-demo="anim"></div>
+        </section>
+
+        <section id="effect">
+            <h2>Effect</h2>
+            <p><code>effect/filmgrain</code>, <code>effect/underline</code>, <code>link</code></p>
+            <h3>filmgrain.filmgrain</h3>
+            <div class="d-grain">ENRON</div>
+            <h3>Link effects (hover)</h3>
+            <div class="links">
+                <a class="d-link__effect-4">link.effect-4</a>
+                <a class="d-link__effect-21">link.effect-21</a>
+                <a class="d-link__underline-fx-1">underline.fx-1</a>
+                <a class="d-link__underline-fx-2">underline.fx-2</a>
+            </div>
+        </section>
+
+        <section id="hamburger">
+            <h2>Hamburger</h2>
+            <p><code>hamburger.base</code> with <code>slider</code>, <code>spin</code>, <code>vortex</code>. Click to toggle <code>.active</code>.</p>
+            <div class="hamburgers">
+                <button class="hamburger" type="button" aria-label="base"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button>
+                <button class="hamburger hamburger--slider" type="button" aria-label="slider"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button>
+                <button class="hamburger hamburger--spin" type="button" aria-label="spin"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button>
+                <button class="hamburger hamburger--vortex" type="button" aria-label="vortex"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button>
+            </div>
+        </section>
+
+        <section id="elevate">
+            <h2>Elevate</h2>
+            <p><code>elevate.elevate-0</code> to <code>elevate-24</code></p>
+            <div class="tiles" data-demo="elevate"></div>
+        </section>
+
+        <section id="filter">
+            <h2>Filter</h2>
+            <p><code>filter</code> presets</p>
+            <div class="tiles" data-demo="filter"></div>
+        </section>
+
+        <section id="pattern">
+            <h2>Background &amp; Pattern</h2>
+            <p><code>background</code> and <code>pattern</code> with default arguments</p>
+            <div class="tiles" data-demo="pattern"></div>
+        </section>
+
+        <section id="ease">
+            <h2>Ease</h2>
+            <p><code>ease</code> timing functions</p>
+            <div class="tiles" data-demo="ease"></div>
+        </section>
+
+        <section id="glyph">
+            <h2>Glyph</h2>
+            <p>Every <code>glyph</code> variable, including entity and legacy aliases</p>
+            <div class="tiles" data-demo="glyph"></div>
+        </section>
+
+        <section id="break">
+            <h2>Break &amp; Media</h2>
+            <p>Highlighted tiles match the current viewport. Resize the window.</p>
+            <h3>break.min / break.max / break.minmax</h3>
+            <div class="tiles" data-demo="break"></div>
+            <h3>media.query</h3>
+            <div class="tiles" data-demo="media"></div>
+        </section>
+
+        <section id="layout">
+            <h2>Layout, Grid &amp; Z-Index</h2>
+            <h3>layout.no-text-overflow</h3>
+            <div class="d-overflow">A line of text that is much too long to fit into its box</div>
+            <h3>layout.fixed-fullsize / layout.fixed-center</h3>
+            <button type="button" data-toggle="open">Open dialog</button>
+            <div class="d-backdrop" data-toggle="open"></div>
+            <div class="d-dialog">
+                <p>Centered with <code>fixed-center</code>, over a <code>fixed-fullsize</code> backdrop.</p>
+                <button type="button" data-toggle="open">Close</button>
+            </div>
+            <h3>grid.golden-ratio</h3>
+            <div class="d-grid">
+                <div>A</div><div>B</div><div>C</div><div>D</div><div>E</div><div>F</div><div>G</div>
+            </div>
+            <h3>z-index</h3>
+            <div class="d-z">
+                <div>z-max</div>
+                <div>z-100</div>
+                <div>z-10</div>
+                <div>z(1)</div>
+            </div>
+        </section>
+
+        <section id="typography">
+            <h2>Typography</h2>
+            <p><code>typography</code>, <code>golden-ratio</code>, <code>font</code></p>
+            <h3>golden-ratio.title-size / golden-ratio.line-height</h3>
+            <div class="d-type">
+                <h4>Golden Ratio Typography</h4>
+                <p>
+                    Many non-authoritarian organizations have foundered on the dubious principle of open membership.
+                    The title above is sized by <code>golden-ratio.title-size</code>, and this paragraph uses the line height
+                    <code>golden-ratio.line-height()</code> calculates for a 16px font on a 700px line.
+                </p>
+            </div>
+            <h3>font.$weight-values</h3>
+            <div class="tiles" data-demo="weight"></div>
+        </section>
+
+        <section id="print">
+            <h2>Print</h2>
+            <p>Open the print preview: the link shows its url, the shadow disappears and the last line is hidden.</p>
+            <div class="d-print">
+                <p><a href="https://github.com/tong/enron">print.url-after-link</a></p>
+                <p><span class="d-shadow">print.remove-shadows</span></p>
+                <p class="d-print-hidden">print.not</p>
+            </div>
+        </section>
+
+        <section id="functions">
+            <h2>Functions</h2>
+            <p>Values computed at compile time</p>
+            <div data-demo="fn"></div>
+        </section>
+    </main>
+    <script>
+        // Builds the tiles from the `--names` list each demo container gets from main.scss
+        for (const el of document.querySelectorAll('[data-demo]')) {
+            const group = el.dataset.demo;
+            const names = getComputedStyle(el).getPropertyValue('--names').trim().replace(/^["']|["']$/g, '').split(/\s+/).filter(Boolean);
+            for (const name of names) {
+                const cls = `d-${group}__${name}`;
+                if (group === 'fn') {
+                    el.insertAdjacentHTML('beforeend', `<div class="${cls}"></div>`);
+                    continue;
+                }
+                const tile = document.createElement('div');
+                tile.className = 'tile';
+                tile.innerHTML = `<div class="tile-box ${cls}"></div><span title="${name}">${name}</span>`;
+                el.append(tile);
+            }
+        }
+        for (const el of document.querySelectorAll('.hamburger')) {
+            el.addEventListener('click', () => el.classList.toggle('active'));
+        }
+        for (const el of document.querySelectorAll('[data-toggle]')) {
+            el.addEventListener('click', () => document.body.classList.toggle(el.dataset.toggle));
+        }
+    </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-/* --- ENRON/PRINT ------- */
+// --- ENRON/PRINT
 
 @mixin not {
     @media print {
@@ -6,7 +6,7 @@
     }
 }
 
-@mixin print-url-after-link() {
+@mixin url-after-link() {
     @media print {
         a[href^="http"]::after {
             content: " ("attr(href)")";

@@ -1,46 +1,53 @@
-/** enron/breakpoint **/
+// --- ENRON/BREAK
+
+@use 'sass:map';
 
 $points: (
-	xs: 32rem, // ~512px
+    xs: 32rem, // ~512px
     sm: 48rem, // ~768px
     md: 64rem, // ~1024px
     lg: 80rem, // ~1280px
     xl: 90rem  // ~1440px
 ) !default;
 
+@function -point($breakpoint) {
+    @if not map.has-key($points, $breakpoint) {
+        @error "Unknown breakpoint `#{$breakpoint}`, expected one of: #{map.keys($points)}.";
+    }
+    @return map.get($points, $breakpoint);
+}
+
+// Builds the media query. `max` is exclusive so that `max(sm)` and `min(sm)` never overlap.
+@function -query($min, $max, $logic) {
+    $query: '';
+    @if $logic {
+        $query: '#{$logic}';
+    }
+    @if $min {
+        @if $query != '' { $query: $query + ' and '; }
+        $query: $query + '(min-width: #{-point($min)})';
+    }
+    @if $max {
+        @if $query != '' { $query: $query + ' and '; }
+        $query: $query + '(width < #{-point($max)})';
+    }
+    @return $query;
+}
+
 @mixin min($breakpoint, $logic: false) {
-    @if($logic) {
-        @media #{$logic} and (min-width: map-get($map: $points, $key: $breakpoint)) {
-            @content;
-        }
-    } @else {
-        @media (min-width: map-get($map: $points, $key: $breakpoint)) {
-            @content;
-        }
+    @media #{-query($breakpoint, null, $logic)} {
+        @content;
     }
 }
 
 @mixin max($breakpoint, $logic: false) {
-    @if($logic) {
-        @media #{$logic} and (max-width: map-get($map: $points, $key: $breakpoint)) {
-            @content;
-        }
-    } @else {
-        @media (max-width: map-get($map: $points, $key: $breakpoint)) {
-            @content;
-        }
+    @media #{-query(null, $breakpoint, $logic)} {
+        @content;
     }
 }
 
 @mixin minmax($min, $max, $logic: false) {
-    @if($logic) {
-        @media #{$logic} and (min-width: map-get($map: $points, $key: $min)) and (max-width: map-get($map: $points, $key: $max)) {
-            @content;
-        }
-    } @else {
-        @media (min-width: map-get($map: $points, $key: $min)) and (max-width: map-get($map: $points, $key: $max)) {
-            @content;
-        }
+    @media #{-query($min, $max, $logic)} {
+        @content;
     }
 }
-

@@ -1,4 +1,6 @@
-/* --- ENRON/Z-INDEX ------ */
+// --- ENRON/Z-INDEX
+
+$z-max: 2147483647 !default;
 
 @mixin z($i) { z-index: $i }
 
@@ -6,8 +8,6 @@
 @mixin z-inherit    { @include z(inherit) }
 @mixin z-initial    { @include z(initial) }
 @mixin z-unset      { @include z(unset) }
-
-$z-max: 2147483647 !default;
 
 @mixin z-0          { @include z(0) }
 @mixin z-10         { @include z(10) }
@@ -19,9 +19,3 @@ $z-max: 2147483647 !default;
 @mixin z-10000000   { @include z(10000000) }
 @mixin z-100000000  { @include z(100000000) }
 @mixin z-1000000000 { @include z(1000000000) }
-
-// /* @for $i from 1 through 3 {
-//     //background-color: lighten($base-color, $i * 5%);
-//     //@mixin z-0 { @include z(0); }
-//     @debug $i;
-// } */

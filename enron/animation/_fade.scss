@@ -1,10 +1,10 @@
-/* --- ENRON/ANIMATION/FADE ----------- */
+// --- ENRON/ANIMATION/FADE
 
 
 // --- Fade in
 
-@mixin in($from:0, $to: 1) {
-    @keyframes fade_in {
+@mixin in($from:0, $to: 1, $name: fade_in) {
+    @keyframes #{$name} {
         from {
             opacity: $from;
         }
@@ -15,22 +15,8 @@
     }
 }
 
-@mixin in_down($from:0, $to: 1, $offset:-100%) {
-    @keyframes fade_in_down {
-        from {
-            opacity: $from;
-            transform: translate3d(0, $offset, 0);
-        }
-
-        100% {
-            opacity: $to;
-            transform: none;
-        }
-    }
-}
-
-@mixin in_up($from:0, $to: 1, $offset:100%) {
-    @keyframes fade_in_up {
+@mixin in-down($from:0, $to: 1, $offset:-100%, $name: fade_in_down) {
+    @keyframes #{$name} {
         from {
             opacity: $from;
             transform: translate3d(0, $offset, 0);
@@ -43,8 +29,22 @@
     }
 }
 
-@mixin in_left($from:0, $to: 1, $offset:100%) {
-    @keyframes fade_in_left {
+@mixin in-up($from:0, $to: 1, $offset:100%, $name: fade_in_up) {
+    @keyframes #{$name} {
+        from {
+            opacity: $from;
+            transform: translate3d(0, $offset, 0);
+        }
+
+        100% {
+            opacity: $to;
+            transform: none;
+        }
+    }
+}
+
+@mixin in-left($from:0, $to: 1, $offset:100%, $name: fade_in_left) {
+    @keyframes #{$name} {
         from {
             opacity: $from;
             transform: translate3d(-$offset, 0, 0);
@@ -56,8 +56,8 @@
     }
 }
 
-@mixin in_right($from:0, $to: 1, $offset:100%) {
-    @keyframes fade_in_right {
+@mixin in-right($from:0, $to: 1, $offset:100%, $name: fade_in_right) {
+    @keyframes #{$name} {
         from {
             opacity: $from;
             transform: translate3d($offset, 0, 0);
@@ -71,8 +71,8 @@
 
 // --- Fade out
 
-@mixin out($from:1, $to: 0) {
-    @keyframes fade_out {
+@mixin out($from:1, $to: 0, $name: fade_out) {
+    @keyframes #{$name} {
         from {
             opacity: $from;
         }

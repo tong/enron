@@ -1,0 +1,553 @@
+// Example page for everything enron provides: `npm run build:example`, then open example/index.html
+//
+// Most demos are generated from the modules themselves (`meta.module-mixins`, `meta.module-variables`).
+// Each demo container gets a `--names` list which index.html turns into tiles with class `d-<group>__<name>`.
+
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:string' as sass-string;
+
+@use '../enron/animation/attention';
+@use '../enron/animation/bounce';
+@use '../enron/animation/fade';
+@use '../enron/animation/flip';
+@use '../enron/animation/hinge';
+@use '../enron/animation/lightspeed';
+@use '../enron/animation/zoom';
+@use '../enron/effect/filmgrain';
+@use '../enron/effect/underline';
+@use '../enron/hamburger';
+@use '../enron/hamburger/slider';
+@use '../enron/hamburger/spin';
+@use '../enron/hamburger/vortex';
+@use '../enron/background';
+@use '../enron/break';
+@use '../enron/ease';
+@use '../enron/elevate';
+@use '../enron/filter';
+@use '../enron/font';
+@use '../enron/glyph';
+@use '../enron/golden-ratio';
+@use '../enron/grid';
+@use '../enron/layout';
+@use '../enron/link';
+@use '../enron/media';
+@use '../enron/pattern';
+@use '../enron/print';
+@use '../enron/string';
+@use '../enron/typography';
+@use '../enron/unit';
+@use '../enron/z-index';
+
+@mixin names($names) {
+    --names: "#{$names}";
+}
+
+// --- Page
+
+:root {
+    --fg: #111;
+    --bg: #fafaf7;
+    --muted: #6b6b6b;
+    --line: #ddd;
+    --accent: #2f5bea;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 2rem 1rem 6rem;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.5 system-ui, sans-serif;
+}
+
+body > header, main {
+    max-width: 72rem;
+    margin: 0 auto;
+}
+
+h1 {
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem 1rem;
+    margin: 1rem 0 2rem;
+    a { color: var(--accent); }
+}
+
+section {
+    padding: 2rem 0;
+    border-top: 1px solid var(--line);
+    > h2 {
+        margin: 0 0 .25rem;
+    }
+    > p {
+        margin: 0 0 1rem;
+        color: var(--muted);
+    }
+}
+
+h3 {
+    margin: 1.5rem 0 .5rem;
+    font-size: .875rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--muted);
+}
+
+code {
+    font-family: ui-monospace, monospace;
+    font-size: .875em;
+}
+
+button {
+    font: inherit;
+}
+
+.tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: 1rem;
+}
+
+.tile {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    min-width: 0;
+    > span {
+        overflow: hidden;
+        font: 12px ui-monospace, monospace;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.tile-box {
+    height: 6rem;
+    border: 1px solid var(--line);
+    background: #fff;
+}
+
+// --- Animations
+
+$anim-names: ();
+@each $ns in (attention, bounce, fade, flip, hinge, lightspeed, zoom) {
+    @each $name, $mixin in meta.module-mixins($ns) {
+        $id: '#{$ns}-#{$name}';
+        @include meta.apply($mixin, $name: a-#{$id});
+        .d-anim__#{$id} {
+            animation-name: a-#{$id};
+        }
+        $anim-names: list.append($anim-names, $id);
+    }
+}
+
+[data-demo="anim"] {
+    @include names($anim-names);
+    .tile {
+        overflow: hidden;
+    }
+    .tile-box {
+        width: 4rem;
+        height: 4rem;
+        margin: 1rem auto;
+        border: 0;
+        background: var(--fg);
+        animation-duration: 2s;
+        animation-fill-mode: both;
+        animation-iteration-count: infinite;
+        backface-visibility: visible;
+    }
+}
+
+// --- Effects
+
+@include filmgrain.grain;
+
+.d-grain {
+    position: relative;
+    height: 12rem;
+    overflow: hidden;
+    // A transform makes the grain's `position: fixed` relative to this box
+    transform: translateZ(0);
+    background: #222;
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 2rem;
+    &::before {
+        @include filmgrain.filmgrain($opacity: .4, $img: '../assets/noise.png');
+        pointer-events: none;
+    }
+}
+
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    font-size: 1.25rem;
+    a {
+        position: relative;
+        color: var(--fg);
+        text-decoration: none;
+        cursor: pointer;
+    }
+}
+
+.d-link__effect-4 { @include link.effect-4(var(--accent), 3px); }
+.d-link__effect-21 { @include link.effect-21; }
+.d-link__underline-fx-1 { @include underline.fx-1; }
+.d-link__underline-fx-2 { @include underline.fx-2; }
+
+// --- Hamburger
+
+@include hamburger.base;
+@include slider.styles;
+@include spin.styles;
+@include vortex.styles;
+
+.hamburgers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+}
+
+// --- Elevate
+
+$elevate-names: ();
+@each $name, $mixin in meta.module-mixins(elevate) {
+    .d-elevate__#{$name} {
+        @include meta.apply($mixin);
+    }
+    $elevate-names: list.append($elevate-names, $name);
+}
+
+[data-demo="elevate"] {
+    @include names($elevate-names);
+    .tile-box {
+        border: 0;
+        border-radius: 4px;
+    }
+}
+
+// --- Filter
+
+$filter-names: ();
+@each $name, $mixin in meta.module-mixins(filter) {
+    .d-filter__#{$name} {
+        @include meta.apply($mixin);
+    }
+    $filter-names: list.append($filter-names, $name);
+}
+
+[data-demo="filter"] {
+    @include names($filter-names);
+    .tile-box {
+        border: 0;
+        background:
+            radial-gradient(circle at 30% 35%, #ffd166 0 18%, transparent 19%),
+            linear-gradient(160deg, #2f5bea, #ef476f 60%, #06d6a0);
+    }
+}
+
+// --- Background & Pattern
+
+$pattern-names: ();
+@each $ns in (background, pattern) {
+    @each $name, $mixin in meta.module-mixins($ns) {
+        .d-pattern__#{$ns}-#{$name} {
+            @include meta.apply($mixin);
+        }
+        $pattern-names: list.append($pattern-names, '#{$ns}-#{$name}');
+    }
+}
+
+[data-demo="pattern"] {
+    @include names($pattern-names);
+    .tile-box {
+        color: var(--accent);
+    }
+}
+
+// --- Ease
+
+@keyframes d-ease {
+    from { left: 0; }
+    to { left: calc(100% - 1rem); }
+}
+
+$ease-names: ();
+@each $name, $value in meta.module-variables(ease) {
+    .d-ease__#{$name}::before {
+        animation-timing-function: $value;
+    }
+    $ease-names: list.append($ease-names, $name);
+}
+
+[data-demo="ease"] {
+    @include names($ease-names);
+    .tile-box {
+        position: relative;
+        height: 2rem;
+        &::before {
+            content: '';
+            position: absolute;
+            top: .5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: d-ease 1.5s infinite alternate;
+        }
+    }
+}
+
+// --- Glyph
+
+$glyph-names: ();
+@each $name, $value in meta.module-variables(glyph) {
+    .d-glyph__#{$name}::before {
+        content: $value;
+    }
+    $glyph-names: list.append($glyph-names, $name);
+}
+
+[data-demo="glyph"] {
+    @include names($glyph-names);
+    grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+    .tile-box {
+        display: grid;
+        place-items: center;
+        height: 4rem;
+        font-size: 2rem;
+    }
+}
+
+// --- Breakpoints & Media
+
+$break-names: ();
+@each $key, $value in break.$points {
+    .d-break__min-#{$key} {
+        @include break.min($key) { background: var(--accent); color: #fff; }
+    }
+    .d-break__max-#{$key} {
+        @include break.max($key) { background: var(--accent); color: #fff; }
+    }
+    $break-names: list.append($break-names, 'min-#{$key}');
+    $break-names: list.append($break-names, 'max-#{$key}');
+}
+.d-break__minmax-sm-lg {
+    @include break.minmax(sm, lg) { background: var(--accent); color: #fff; }
+}
+.d-break__min-sm-screen {
+    @include break.min(sm, screen) { background: var(--accent); color: #fff; }
+}
+$break-names: list.append($break-names, minmax-sm-lg);
+$break-names: list.append($break-names, min-sm-screen);
+
+$media-queries: (
+    gt-phone: ('>phone',),
+    lte-tablet: ('<=tablet',),
+    gte-desktop: ('>=desktop',),
+    phone-to-tablet: ('>phone', '<=tablet'),
+    gte-600px: ('>=600px',),
+    retina2x: ('retina2x',),
+    screen: ('screen',),
+);
+$media-names: ();
+@each $name, $conditions in $media-queries {
+    .d-media__#{$name} {
+        @include media.query($conditions...) { background: var(--accent); color: #fff; }
+    }
+    $media-names: list.append($media-names, $name);
+}
+
+[data-demo="break"] { @include names($break-names); }
+[data-demo="media"] { @include names($media-names); }
+
+[data-demo="break"], [data-demo="media"] {
+    .tile-box {
+        height: 2.5rem;
+    }
+}
+
+// --- Layout, Grid & Z-Index
+
+.d-overflow {
+    @include layout.no-text-overflow;
+    max-width: 16rem;
+    padding: .5rem;
+    border: 1px solid var(--line);
+}
+
+.d-backdrop {
+    @include layout.fixed-fullsize(1000);
+    background: rgb(0 0 0 / .4);
+}
+
+.d-dialog {
+    @include layout.fixed-center(1001);
+    @include elevate.elevate-24;
+    padding: 2rem;
+    background: #fff;
+}
+
+.d-backdrop, .d-dialog {
+    display: none;
+    .open & {
+        display: block;
+    }
+}
+
+.d-grid {
+    @include grid.golden-ratio;
+    display: grid;
+    height: 20rem;
+    > * {
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--bg);
+        background: var(--accent);
+        color: #fff;
+        font-weight: 700;
+    }
+    @each $area in (A, B, C, D, E, F, G) {
+        > :nth-child(#{list.index((A, B, C, D, E, F, G), $area)}) { grid-area: $area; }
+    }
+}
+
+.d-z {
+    position: relative;
+    height: 9rem;
+    > div {
+        position: absolute;
+        width: 8rem;
+        height: 6rem;
+        padding: .5rem;
+        border: 1px solid var(--fg);
+        background: #fff;
+        font: 12px ui-monospace, monospace;
+        // Labels in the corner the box above leaves visible
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
+    > :nth-child(1) { @include z-index.z-max; top: 0; left: 0; }
+    > :nth-child(2) { @include z-index.z-100; top: 1.5rem; left: 2.5rem; }
+    > :nth-child(3) { @include z-index.z-10; top: 3rem; left: 5rem; }
+    > :nth-child(4) { @include z-index.z(1); top: 4.5rem; left: 7.5rem; }
+}
+
+// --- Typography
+
+.d-type {
+    max-width: golden-ratio.$content-width;
+    font-family: typography.$font-family;
+    h4 {
+        @include golden-ratio.title-size;
+        margin: 0 0 1rem;
+    }
+    p {
+        margin: 0;
+        line-height: golden-ratio.line-height();
+    }
+}
+
+$weight-names: ();
+@each $key, $value in font.$weight-values {
+    // `black` is a color, not a string
+    $name: meta.inspect($key);
+    .d-weight__#{$name} {
+        font-weight: $value;
+    }
+    $weight-names: list.append($weight-names, $name);
+}
+
+[data-demo="weight"] {
+    @include names($weight-names);
+    .tile-box {
+        display: grid;
+        place-items: center;
+        height: 4rem;
+        font-size: 1.5rem;
+        &::before {
+            content: 'Aa';
+        }
+    }
+}
+
+// --- Print
+
+@include print.remove-shadows;
+
+.d-print {
+    @include print.url-after-link;
+}
+
+.d-print-hidden {
+    @include print.not;
+}
+
+.d-shadow {
+    @include elevate.elevate-8;
+    display: inline-block;
+    padding: 1rem;
+    background: #fff;
+}
+
+// --- Functions
+
+$fns: (
+    'string.replace("a b c", " ", "_")': string.replace('a b c', ' ', '_'),
+    'string.replace-first("a", "x", "abca")': string.replace-first('a', 'x', 'abca'),
+    'string.to-number("-1.5rem")': string.to-number('-1.5rem'),
+    'unit.convert-unit(10, "px")': unit.convert-unit(10, 'px'),
+    'unit.convert-unit(1in, "px")': unit.convert-unit(1in, 'px'),
+    'unit.convert-unit(90deg, "turn")': unit.convert-unit(90deg, 'turn'),
+    'typography.px-to-rem(24px)': typography.px-to-rem(24px),
+    'golden-ratio.$phi': golden-ratio.$phi,
+    'golden-ratio.title-size(16px)': golden-ratio.title-size(16px),
+    'golden-ratio.line-height(16px, 700px)': golden-ratio.line-height(16px, 700px),
+    'z-index.$z-max': z-index.$z-max,
+    'ease.$out-expo': ease.$out-expo,
+    'font.$weight-values': font.$weight-values,
+);
+
+$fn-names: ();
+$i: 0;
+@each $expr, $value in $fns {
+    $i: $i + 1;
+    .d-fn__#{$i} {
+        &::before { content: $expr; }
+        &::after { content: sass-string.quote(meta.inspect($value)); }
+    }
+    $fn-names: list.append($fn-names, $i);
+}
+
+[data-demo="fn"] {
+    @include names($fn-names);
+    display: grid;
+    gap: 0;
+    font: 14px ui-monospace, monospace;
+    > div {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1rem;
+        padding: .5rem 0;
+        border-bottom: 1px solid var(--line);
+        overflow-wrap: anywhere;
+        &::after {
+            color: var(--accent);
+        }
+    }
+}

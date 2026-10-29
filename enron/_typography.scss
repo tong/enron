@@ -1,21 +1,16 @@
-/* --- ENRON/TYPOGRAPHY --- */
+// --- ENRON/TYPOGRAPHY
+
 @use 'sass:math';
 @use 'sass:map';
 @use 'sass:string';
+@use 'font';
 
 // $basesize: 16 !default;
 // $basesize_px: $basesize * 1px;
 // @debug $basesize;
 // @debug $basesize_px;
 $font-family: string.unquote('serif') !default;
-$font-weight-values: (
-    thin: 100,
-    light: 300,
-    regular: 400,
-    medium: 500,
-    bold: 700,
-    black: 900,
-) !default;
+$font-weight-values: font.$weight-values !default;
 
 @function get-letter-spacing_($tracking, $size) {
     // @return math.div($tracking, ($font-size * 16)) * 1em;
@@ -32,35 +27,35 @@ $font-weight-values: (
     }
     @return math.div($px, 16px) * 1rem;
 }
-
-/* @function is-typography-style($style) {
-    @return map.has-key($styles, $style);
-}
-
-@function get-typography-styles() {
-    @return map.keys($styles);
-}
-
-@function get-font($typography) {
-    @return map.get($styles, $typography, font-family);
-} */
-
-/* 
-@mixin body1 {
-    font-size: px-to-rem($basesize);
-    // line-height: px-to-rem(24);
-    font-weight: map.get($font-weight-values, regular);
-    letter-spacing: get-letter-spacing_(0.5, 1);
-    text-decoration: inherit;
-    text-transform: inherit;
-}
-
-@mixin body2 {
-    font-size: px-to-rem(14px);
-    line-height: px-to-rem(20px);
-    font-weight: map.get($font-weight-values, regular);
-    letter-spacing: get-letter-spacing_(0.25, 0.875);
-    text-decoration: inherit;
-    text-transform: inherit;
-}
- */
+//
+// @function is-typography-style($style) {
+//     @return map.has-key($styles, $style);
+// }
+//
+// @function get-typography-styles() {
+//     @return map.keys($styles);
+// }
+//
+// @function get-font($typography) {
+//     @return map.get($styles, $typography, font-family);
+// }
+//
+//  
+// @mixin body1 {
+//     font-size: px-to-rem($basesize);
+//     // line-height: px-to-rem(24);
+//     font-weight: map.get($font-weight-values, regular);
+//     letter-spacing: get-letter-spacing_(0.5, 1);
+//     text-decoration: inherit;
+//     text-transform: inherit;
+// }
+//
+// @mixin body2 {
+//     font-size: px-to-rem(14px);
+//     line-height: px-to-rem(20px);
+//     font-weight: map.get($font-weight-values, regular);
+//     letter-spacing: get-letter-spacing_(0.25, 0.875);
+//     text-decoration: inherit;
+//     text-transform: inherit;
+// }
+// /

@@ -1,4 +1,4 @@
-/* --- ENRON/ELEVATE ------ */
+// --- ENRON/ELEVATE
 
 $elevate-color-1: rgba(0, 0, 0, .2) !default;
 $elevate-color-2: rgba(0, 0, 0, .14) !default;
@@ -104,16 +104,16 @@ $elevate-amount-24-1: 0 11px 15px -7px !default;
 $elevate-amount-24-2: 0 24px 38px 3px !default;
 $elevate-amount-24-3: 0 9px 46px 8px !default;
 
-/*
-$elevate-amounts: (
-    "1-1": $elevate-amount-1-1,
-    "1-2": $elevate-amount-1-2,
-    "1-3": $elevate-amount-1-3,
-    "24-1": $elevate-amount-24-1,
-    "24-2": $elevate-amount-24-2,
-    "24-3": $elevate-amount-24-3,
-);
-*/
+
+// $ elevate-amounts: (
+//     "1-1": $elevate-amount-1-1,
+//     "1-2": $elevate-amount-1-2,
+//     "1-3": $elevate-amount-1-3,
+//     "24-1": $elevate-amount-24-1,
+//     "24-2": $elevate-amount-24-2,
+//     "24-3": $elevate-amount-24-3,
+// );
+
 
 // $amount-24: (
 //     "1": $elevate-amount-24-1,

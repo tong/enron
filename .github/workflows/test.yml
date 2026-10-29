@@ -10,10 +10,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
       - name: Setup
-        run: npm install
+        run: npm ci
+      - name: Test
+        run: npm test
       - name: Build
         run: npm run build
-      - name: Result
-        run: cat index.css
+      - name: Build example
+        run: npm run build:example

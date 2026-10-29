@@ -1,0 +1,37 @@
+// --- ENRON/GOLDEN-RATIO
+
+// Golden Ratio Typography, see https://gist.github.com/gregrickaby/5001983
+
+@use 'sass:math';
+
+/// The Golden Ratio, 1.61803398874989
+$phi: math.div(1 + math.sqrt(5), 2);
+
+$base-font-size: 16px !default;
+$content-width: 700px !default;
+
+/// Optimal line height (unitless) for a font size and line width
+///
+/// @param {Number} $font-size - Font size in px
+/// @param {Number} $width - Line width in px
+/// @return {Number}
+@function line-height($font-size: $base-font-size, $width: $content-width) {
+    $size: math.div($font-size, 1px);
+    $w: math.div($width, 1px);
+    $height: $size * ($phi - math.div(1, 2 * $phi) * (1 - math.div($w, math.pow($size * $phi, 2))));
+    @return math.div(math.round($height), $size);
+}
+
+/// Title font size derived from the base font size
+///
+/// @param {Number} $font-size - Base font size in px
+/// @return {Number} Font size in px
+@function title-size($font-size: $base-font-size) {
+    @return math.round($font-size * math.pow($phi, 2));
+}
+
+@mixin title-size($font-size: $base-font-size, $width: $content-width) {
+    $size: title-size($font-size);
+    font-size: math.div($size, $font-size) * 1rem;
+    line-height: line-height($size, $width);
+}

@@ -1,10 +1,10 @@
-/* --- ENRON/ANIMATION/BOUNCE --------- */
+// --- ENRON/ANIMATION/BOUNCE
 
 
 // --- Bounce in
 
-@mixin in() {
-    @keyframes bounce_in {
+@mixin in($name: bounce_in) {
+    @keyframes #{$name} {
 
         from,
         20%,
@@ -44,8 +44,8 @@
     }
 }
 
-@mixin in_down() {
-    @keyframes bounce_in_down {
+@mixin in-down($name: bounce_in_down) {
+    @keyframes #{$name} {
 
         from,
         60%,
@@ -77,8 +77,8 @@
     }
 }
 
-@mixin in_up() {
-    @keyframes bounce_in_up {
+@mixin in-up($name: bounce_in_up) {
+    @keyframes #{$name} {
 
         from,
         60%,
@@ -112,8 +112,8 @@
     }
 }
 
-@mixin in_left() {
-    @keyframes bounce_in_left {
+@mixin in-left($name: bounce_in_left) {
+    @keyframes #{$name} {
 
         from,
         60%,
@@ -147,8 +147,8 @@
     }
 }
 
-@mixin in_right() {
-    @keyframes bounce_in_right {
+@mixin in-right($name: bounce_in_right) {
+    @keyframes #{$name} {
 
         from,
         60%,
