@@ -1,0 +1,51 @@
+// --- ENRON/SPACING
+
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+
+$base: 1rem !default;
+
+/// Multiples of `$base`. Step 4 is `$base`.
+$scale: (
+    0: 0,
+    1: 0.25,
+    2: 0.5,
+    3: 0.75,
+    4: 1,
+    5: 1.25,
+    6: 1.5,
+    8: 2,
+    10: 2.5,
+    12: 3,
+    16: 4,
+    20: 5,
+    24: 6,
+) !default;
+
+/// Space for one or more steps of `$scale`. Negative steps give negative space.
+///
+/// @param {Number} $steps - One step per value, e.g. for a `padding` shorthand
+/// @return {Number | List}
+/// @example scss
+///  margin-top: spacing.space(4); // 1rem
+///  padding: spacing.space(2, 4); // .5rem 1rem
+///  margin-left: spacing.space(-2); // -.5rem
+@function space($steps...) {
+    $result: ();
+    @each $step in $steps {
+        $key: math.abs($step);
+        @if not map.has-key($scale, $key) {
+            @error "Unknown spacing step `#{$step}`, expected one of: #{map.keys($scale)}.";
+        }
+        $value: map.get($scale, $key) * $base;
+        @if $step < 0 {
+            $value: -$value;
+        }
+        $result: list.append($result, $value, space);
+    }
+    @if list.length($result) == 1 {
+        @return list.nth($result, 1);
+    }
+    @return $result;
+}

@@ -1,8 +1,6 @@
 // --- ENRON/ANIMATION/FLIP
 
 
-// --- 
-
 @mixin flip($name: flip) {
     @keyframes #{$name} {
         from {
@@ -32,9 +30,6 @@
     }
 }
 
-// backface-visibility: visible;
-// animation-name: flip;
-
 
 @mixin flip-y($name: flip_y) {
     @keyframes #{$name} {
@@ -60,6 +55,70 @@
 
         100% {
             transform: perspective(400px);
+        }
+    }
+}
+
+@mixin flip-x($name: flip_x) {
+    @keyframes #{$name} {
+        from {
+            transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+            animation-timing-function: ease-in;
+            opacity: 0;
+        }
+
+        40% {
+            transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+            animation-timing-function: ease-in;
+        }
+
+        60% {
+            transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+            opacity: 1;
+        }
+
+        80% {
+            transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+        }
+
+        100% {
+            transform: perspective(400px);
+        }
+    }
+}
+
+@mixin flip-out-x($name: flip_out_x) {
+    @keyframes #{$name} {
+        from {
+            transform: perspective(400px);
+        }
+
+        30% {
+            transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+            opacity: 1;
+        }
+
+        100% {
+            transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+            opacity: 0;
+        }
+    }
+}
+
+@mixin flip-out-y($name: flip_out_y) {
+    @keyframes #{$name} {
+        from {
+            transform: perspective(400px);
+        }
+
+        30% {
+            transform: perspective(400px) rotate3d(0, 1, 0, -15deg);
+            opacity: 1;
+        }
+
+        100% {
+            transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+            opacity: 0;
         }
     }
 }

@@ -1,5 +1,8 @@
 // --- ENRON/ELEVATE
 
+@use 'sass:list';
+@use 'sass:map';
+
 $elevate-color-1: rgba(0, 0, 0, .2) !default;
 $elevate-color-2: rgba(0, 0, 0, .14) !default;
 $elevate-color-3: rgba(0, 0, 0, .12) !default;
@@ -104,206 +107,86 @@ $elevate-amount-24-1: 0 11px 15px -7px !default;
 $elevate-amount-24-2: 0 24px 38px 3px !default;
 $elevate-amount-24-3: 0 9px 46px 8px !default;
 
+$-amounts: (
+    0: ($elevate-amount-0-1, $elevate-amount-0-2, $elevate-amount-0-3),
+    1: ($elevate-amount-1-1, $elevate-amount-1-2, $elevate-amount-1-3),
+    2: ($elevate-amount-2-1, $elevate-amount-2-2, $elevate-amount-2-3),
+    3: ($elevate-amount-3-1, $elevate-amount-3-2, $elevate-amount-3-3),
+    4: ($elevate-amount-4-1, $elevate-amount-4-2, $elevate-amount-4-3),
+    5: ($elevate-amount-5-1, $elevate-amount-5-2, $elevate-amount-5-3),
+    6: ($elevate-amount-6-1, $elevate-amount-6-2, $elevate-amount-6-3),
+    7: ($elevate-amount-7-1, $elevate-amount-7-2, $elevate-amount-7-3),
+    8: ($elevate-amount-8-1, $elevate-amount-8-2, $elevate-amount-8-3),
+    9: ($elevate-amount-9-1, $elevate-amount-9-2, $elevate-amount-9-3),
+    10: ($elevate-amount-10-1, $elevate-amount-10-2, $elevate-amount-10-3),
+    11: ($elevate-amount-11-1, $elevate-amount-11-2, $elevate-amount-11-3),
+    12: ($elevate-amount-12-1, $elevate-amount-12-2, $elevate-amount-12-3),
+    13: ($elevate-amount-13-1, $elevate-amount-13-2, $elevate-amount-13-3),
+    14: ($elevate-amount-14-1, $elevate-amount-14-2, $elevate-amount-14-3),
+    15: ($elevate-amount-15-1, $elevate-amount-15-2, $elevate-amount-15-3),
+    16: ($elevate-amount-16-1, $elevate-amount-16-2, $elevate-amount-16-3),
+    17: ($elevate-amount-17-1, $elevate-amount-17-2, $elevate-amount-17-3),
+    18: ($elevate-amount-18-1, $elevate-amount-18-2, $elevate-amount-18-3),
+    19: ($elevate-amount-19-1, $elevate-amount-19-2, $elevate-amount-19-3),
+    20: ($elevate-amount-20-1, $elevate-amount-20-2, $elevate-amount-20-3),
+    21: ($elevate-amount-21-1, $elevate-amount-21-2, $elevate-amount-21-3),
+    22: ($elevate-amount-22-1, $elevate-amount-22-2, $elevate-amount-22-3),
+    23: ($elevate-amount-23-1, $elevate-amount-23-2, $elevate-amount-23-3),
+    24: ($elevate-amount-24-1, $elevate-amount-24-2, $elevate-amount-24-3),
+);
 
-// $ elevate-amounts: (
-//     "1-1": $elevate-amount-1-1,
-//     "1-2": $elevate-amount-1-2,
-//     "1-3": $elevate-amount-1-3,
-//     "24-1": $elevate-amount-24-1,
-//     "24-2": $elevate-amount-24-2,
-//     "24-3": $elevate-amount-24-3,
-// );
-
-
-// $amount-24: (
-//     "1": $elevate-amount-24-1,
-//     // "2": 0 24px 38px 3px !default,
-//     // "2": 0 9px 46px 8px !default
-// );
-//
-// $testlist: (
-//     23px, 333px, 0
-// );
-
-// @mixin -elevate($amount) {
-//     box-shadow:
-//         map.get($elevate-amounts, #{$amount}-1) $elevate-color-1,
-//         map.get($elevate-amounts, #{$amount}-2) $elevate-color-2,
-//         map.get($elevate-amounts, #{$amount}-3) $elevate-color-3;
-// }
-
-@mixin elevate-0 {
-    box-shadow:
-        $elevate-amount-0-1 $elevate-color-1,
-        $elevate-amount-0-2 $elevate-color-2,
-        $elevate-amount-0-3 $elevate-color-3;
+/// Material style shadow for an elevation level
+///
+/// @param {Number} $level - 0 to 24
+/// @param {Color} $color-1 - Umbra color
+/// @param {Color} $color-2 - Penumbra color
+/// @param {Color} $color-3 - Ambient color
+/// @return {List} A `box-shadow` value
+/// @example scss
+///  box-shadow: elevate.shadow(4), inset 0 0 0 1px red;
+@function shadow($level, $color-1: $elevate-color-1, $color-2: $elevate-color-2, $color-3: $elevate-color-3) {
+    @if not map.has-key($-amounts, $level) {
+        @error "Unknown elevation `#{$level}`, expected 0 to 24.";
+    }
+    $amount: map.get($-amounts, $level);
+    @return (
+        list.append(list.nth($amount, 1), $color-1),
+        list.append(list.nth($amount, 2), $color-2),
+        list.append(list.nth($amount, 3), $color-3)
+    );
 }
 
-@mixin elevate-1 {
-    box-shadow:
-        $elevate-amount-1-1 $elevate-color-1,
-        $elevate-amount-1-2 $elevate-color-2,
-        $elevate-amount-1-3 $elevate-color-3;
+/// Sets the `box-shadow` for an elevation level
+///
+/// @example scss
+///  @include elevate.elevate(8);
+///  @include elevate.elevate(8, rgba(0, 0, 0, .6), rgba(0, 0, 0, .4), rgba(0, 0, 0, .3)); // On dark backgrounds
+@mixin elevate($level, $color-1: $elevate-color-1, $color-2: $elevate-color-2, $color-3: $elevate-color-3) {
+    box-shadow: shadow($level, $color-1, $color-2, $color-3);
 }
 
-@mixin elevate-2 {
-    box-shadow:
-        $elevate-amount-2-1 $elevate-color-1,
-        $elevate-amount-2-2 $elevate-color-2,
-        $elevate-amount-2-3 $elevate-color-3;
-}
-
-@mixin elevate-3 {
-    box-shadow:
-        $elevate-amount-3-1 $elevate-color-1,
-        $elevate-amount-3-2 $elevate-color-2,
-        $elevate-amount-3-3 $elevate-color-3;
-}
-
-@mixin elevate-4 {
-    box-shadow:
-        $elevate-amount-4-1 $elevate-color-1,
-        $elevate-amount-4-2 $elevate-color-2,
-        $elevate-amount-4-3 $elevate-color-3;
-}
-
-@mixin elevate-5 {
-    box-shadow:
-        $elevate-amount-5-1 $elevate-color-1,
-        $elevate-amount-5-2 $elevate-color-2,
-        $elevate-amount-5-3 $elevate-color-3;
-}
-
-@mixin elevate-6 {
-    box-shadow:
-        $elevate-amount-6-1 $elevate-color-1,
-        $elevate-amount-6-2 $elevate-color-2,
-        $elevate-amount-6-3 $elevate-color-3;
-}
-
-@mixin elevate-7 {
-    box-shadow:
-        $elevate-amount-7-1 $elevate-color-1,
-        $elevate-amount-7-2 $elevate-color-2,
-        $elevate-amount-7-3 $elevate-color-3;
-}
-
-@mixin elevate-8 {
-    box-shadow:
-        $elevate-amount-8-1 $elevate-color-1,
-        $elevate-amount-8-2 $elevate-color-2,
-        $elevate-amount-8-3 $elevate-color-3;
-}
-
-@mixin elevate-9 {
-    box-shadow:
-        $elevate-amount-9-1 $elevate-color-1,
-        $elevate-amount-9-2 $elevate-color-2,
-        $elevate-amount-9-3 $elevate-color-3;
-}
-
-
-@mixin elevate-10 {
-    box-shadow:
-        $elevate-amount-10-1 $elevate-color-1,
-        $elevate-amount-10-2 $elevate-color-2,
-        $elevate-amount-10-3 $elevate-color-3;
-}
-
-@mixin elevate-11 {
-    box-shadow:
-        $elevate-amount-11-1 $elevate-color-1,
-        $elevate-amount-11-2 $elevate-color-2,
-        $elevate-amount-11-3 $elevate-color-3;
-}
-
-@mixin elevate-12 {
-    box-shadow:
-        $elevate-amount-12-1 $elevate-color-1,
-        $elevate-amount-12-2 $elevate-color-2,
-        $elevate-amount-12-3 $elevate-color-3;
-}
-
-@mixin elevate-13 {
-    box-shadow:
-        $elevate-amount-13-1 $elevate-color-1,
-        $elevate-amount-13-2 $elevate-color-2,
-        $elevate-amount-13-3 $elevate-color-3;
-}
-
-@mixin elevate-14 {
-    box-shadow:
-        $elevate-amount-14-1 $elevate-color-1,
-        $elevate-amount-14-2 $elevate-color-2,
-        $elevate-amount-14-3 $elevate-color-3;
-}
-
-@mixin elevate-15 {
-    box-shadow:
-        $elevate-amount-15-1 $elevate-color-1,
-        $elevate-amount-15-2 $elevate-color-2,
-        $elevate-amount-15-3 $elevate-color-3;
-}
-
-@mixin elevate-16 {
-    box-shadow:
-        $elevate-amount-16-1 $elevate-color-1,
-        $elevate-amount-16-2 $elevate-color-2,
-        $elevate-amount-16-3 $elevate-color-3;
-}
-
-@mixin elevate-17 {
-    box-shadow:
-        $elevate-amount-17-1 $elevate-color-1,
-        $elevate-amount-17-2 $elevate-color-2,
-        $elevate-amount-17-3 $elevate-color-3;
-}
-
-@mixin elevate-18 {
-    box-shadow:
-        $elevate-amount-18-1 $elevate-color-1,
-        $elevate-amount-18-2 $elevate-color-2,
-        $elevate-amount-18-3 $elevate-color-3;
-}
-
-@mixin elevate-19 {
-    box-shadow:
-        $elevate-amount-19-1 $elevate-color-1,
-        $elevate-amount-19-2 $elevate-color-2,
-        $elevate-amount-19-3 $elevate-color-3;
-}
-
-@mixin elevate-20 {
-    box-shadow:
-        $elevate-amount-20-1 $elevate-color-1,
-        $elevate-amount-20-2 $elevate-color-2,
-        $elevate-amount-20-3 $elevate-color-3;
-}
-
-@mixin elevate-21 {
-    box-shadow:
-        $elevate-amount-21-1 $elevate-color-1,
-        $elevate-amount-21-2 $elevate-color-2,
-        $elevate-amount-21-3 $elevate-color-3;
-}
-
-@mixin elevate-22 {
-    box-shadow:
-        $elevate-amount-22-1 $elevate-color-1,
-        $elevate-amount-22-2 $elevate-color-2,
-        $elevate-amount-22-3 $elevate-color-3;
-}
-
-@mixin elevate-23 {
-    box-shadow:
-        $elevate-amount-23-1 $elevate-color-1,
-        $elevate-amount-23-2 $elevate-color-2,
-        $elevate-amount-23-3 $elevate-color-3;
-}
-
-@mixin elevate-24 {
-    box-shadow:
-        $elevate-amount-24-1 $elevate-color-1,
-        $elevate-amount-24-2 $elevate-color-2,
-        $elevate-amount-24-3 $elevate-color-3;
-}
+@mixin elevate-0  { @include elevate(0) }
+@mixin elevate-1  { @include elevate(1) }
+@mixin elevate-2  { @include elevate(2) }
+@mixin elevate-3  { @include elevate(3) }
+@mixin elevate-4  { @include elevate(4) }
+@mixin elevate-5  { @include elevate(5) }
+@mixin elevate-6  { @include elevate(6) }
+@mixin elevate-7  { @include elevate(7) }
+@mixin elevate-8  { @include elevate(8) }
+@mixin elevate-9  { @include elevate(9) }
+@mixin elevate-10 { @include elevate(10) }
+@mixin elevate-11 { @include elevate(11) }
+@mixin elevate-12 { @include elevate(12) }
+@mixin elevate-13 { @include elevate(13) }
+@mixin elevate-14 { @include elevate(14) }
+@mixin elevate-15 { @include elevate(15) }
+@mixin elevate-16 { @include elevate(16) }
+@mixin elevate-17 { @include elevate(17) }
+@mixin elevate-18 { @include elevate(18) }
+@mixin elevate-19 { @include elevate(19) }
+@mixin elevate-20 { @include elevate(20) }
+@mixin elevate-21 { @include elevate(21) }
+@mixin elevate-22 { @include elevate(22) }
+@mixin elevate-23 { @include elevate(23) }
+@mixin elevate-24 { @include elevate(24) }

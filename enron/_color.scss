@@ -1,0 +1,69 @@
+// --- ENRON/COLOR
+
+// Works with Sass colors, not CSS custom properties
+
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:math';
+
+/// Mixes a color with white
+@function tint($color, $amount: 10%) {
+    @return color.mix(white, $color, $amount);
+}
+
+/// Mixes a color with black
+@function shade($color, $amount: 10%) {
+    @return color.mix(black, $color, $amount);
+}
+
+/// Relative luminance, 0 (black) to 1 (white), as defined by WCAG
+@function luminance($color) {
+    $sum: 0;
+    @each $channel, $weight in ('red': 0.2126, 'green': 0.7152, 'blue': 0.0722) {
+        $value: math.div(color.channel($color, $channel, $space: rgb), 255);
+        @if $value <= 0.04045 {
+            $value: math.div($value, 12.92);
+        } @else {
+            $value: math.pow(math.div($value + 0.055, 1.055), 2.4);
+        }
+        $sum: $sum + $value * $weight;
+    }
+    @return $sum;
+}
+
+/// WCAG contrast ratio of two colors, 1 to 21. Text needs at least 4.5 (AA), large text 3.
+@function contrast($a, $b) {
+    $la: luminance($a);
+    $lb: luminance($b);
+    $ratio: math.div(math.max($la, $lb) + 0.05, math.min($la, $lb) + 0.05);
+    @return math.div(math.round($ratio * 100), 100);
+}
+
+/// Picks whichever of `$light` and `$dark` contrasts more with `$background`
+///
+/// @example scss
+///  .button { background: $brand; color: color.text-color($brand); }
+@function text-color($background, $light: #fff, $dark: #000) {
+    @if contrast($background, $light) >= contrast($background, $dark) {
+        @return $light;
+    }
+    @return $dark;
+}
+
+/// Shades from 50 (lightest) to 900 (darkest), with `$color` as 500
+///
+/// @return {Map}
+@function palette($color) {
+    @return (
+        50: tint($color, 90%),
+        100: tint($color, 80%),
+        200: tint($color, 60%),
+        300: tint($color, 40%),
+        400: tint($color, 20%),
+        500: $color,
+        600: shade($color, 15%),
+        700: shade($color, 30%),
+        800: shade($color, 45%),
+        900: shade($color, 60%),
+    );
+}

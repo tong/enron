@@ -14,6 +14,8 @@
 @use '../enron/animation/flip';
 @use '../enron/animation/hinge';
 @use '../enron/animation/lightspeed';
+@use '../enron/animation/rotate';
+@use '../enron/animation/slide';
 @use '../enron/animation/zoom';
 @use '../enron/effect/filmgrain';
 @use '../enron/effect/underline';
@@ -21,11 +23,15 @@
 @use '../enron/hamburger/slider';
 @use '../enron/hamburger/spin';
 @use '../enron/hamburger/vortex';
+@use '../enron/a11y';
+@use '../enron/animate';
 @use '../enron/background';
 @use '../enron/break';
+@use '../enron/color';
 @use '../enron/ease';
 @use '../enron/elevate';
 @use '../enron/filter';
+@use '../enron/fluid';
 @use '../enron/font';
 @use '../enron/glyph';
 @use '../enron/golden-ratio';
@@ -35,6 +41,7 @@
 @use '../enron/media';
 @use '../enron/pattern';
 @use '../enron/print';
+@use '../enron/spacing';
 @use '../enron/string';
 @use '../enron/typography';
 @use '../enron/unit';
@@ -47,11 +54,13 @@
 // --- Page
 
 :root {
-    --fg: #111;
-    --bg: #fafaf7;
-    --muted: #6b6b6b;
-    --line: #ddd;
-    --accent: #2f5bea;
+    color-scheme: dark;
+    --fg: #fff;
+    --bg: #000;
+    --surface: #111;
+    --muted: #999;
+    --line: #333;
+    --accent: #5b8cff;
 }
 
 * {
@@ -134,13 +143,21 @@ button {
 .tile-box {
     height: 6rem;
     border: 1px solid var(--line);
-    background: #fff;
+    background: var(--tile-bg, var(--surface));
+}
+
+// Light backdrop for demos that need one, like shadows
+.stage {
+    padding: 1.5rem;
+    background: #e8e8e8;
+    color: #000;
+    --line: #ccc;
 }
 
 // --- Animations
 
 $anim-names: ();
-@each $ns in (attention, bounce, fade, flip, hinge, lightspeed, zoom) {
+@each $ns in (attention, bounce, fade, flip, hinge, lightspeed, rotate, slide, zoom) {
     @each $name, $mixin in meta.module-mixins($ns) {
         $id: '#{$ns}-#{$name}';
         @include meta.apply($mixin, $name: a-#{$id});
@@ -155,6 +172,12 @@ $anim-names: ();
     @include names($anim-names);
     .tile {
         overflow: hidden;
+        // Keep the label above boxes that slide out of their area
+        > span {
+            position: relative;
+            z-index: 1;
+            background: var(--bg);
+        }
     }
     .tile-box {
         width: 4rem;
@@ -167,6 +190,13 @@ $anim-names: ();
         animation-iteration-count: infinite;
         backface-visibility: visible;
     }
+}
+
+.d-play {
+    width: 4rem;
+    height: 4rem;
+    background: var(--fg);
+    @include animate.play(a-attention-heart-beat, 1.5s, $iterations: infinite);
 }
 
 // --- Effects
@@ -185,7 +215,7 @@ $anim-names: ();
     place-items: center;
     font-size: 2rem;
     &::before {
-        @include filmgrain.filmgrain($opacity: .4, $img: '../assets/noise.png');
+        @include filmgrain.filmgrain($opacity: .4);
         pointer-events: none;
     }
 }
@@ -226,17 +256,24 @@ $anim-names: ();
 
 $elevate-names: ();
 @each $name, $mixin in meta.module-mixins(elevate) {
-    .d-elevate__#{$name} {
-        @include meta.apply($mixin);
+    // `elevate($level)` is what the numbered mixins call
+    @if $name != elevate {
+        .d-elevate__#{$name} {
+            @include meta.apply($mixin);
+        }
+        $elevate-names: list.append($elevate-names, $name);
     }
-    $elevate-names: list.append($elevate-names, $name);
 }
 
 [data-demo="elevate"] {
     @include names($elevate-names);
+    // Shadows don't show on black, use dark grays
+    padding: 1.5rem;
+    background: #222;
     .tile-box {
         border: 0;
         border-radius: 4px;
+        background: #333;
     }
 }
 
@@ -274,8 +311,10 @@ $pattern-names: ();
 
 [data-demo="pattern"] {
     @include names($pattern-names);
+    // The library defaults draw dark patterns, show them on white
+    --tile-bg: #fff;
     .tile-box {
-        color: var(--accent);
+        color: #2f5bea;
     }
 }
 
@@ -307,23 +346,33 @@ $ease-names: ();
             height: 1rem;
             border-radius: 50%;
             background: var(--accent);
-            animation: d-ease 1.5s infinite alternate;
+            // Longhands, the shorthand would reset the timing function set per curve
+            animation-name: d-ease;
+            animation-duration: 1.5s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
         }
     }
 }
 
 // --- Glyph
 
+// Each character once, under its first (Unicode) name. Entity names and legacy names are aliases.
 $glyph-names: ();
+$glyph-values: ();
 @each $name, $value in meta.module-variables(glyph) {
-    .d-glyph__#{$name}::before {
-        content: $value;
+    @if not list.index($glyph-values, $value) {
+        .d-glyph__#{$name}::before {
+            content: $value;
+        }
+        $glyph-names: list.append($glyph-names, $name);
+        $glyph-values: list.append($glyph-values, $value);
     }
-    $glyph-names: list.append($glyph-names, $name);
 }
 
 [data-demo="glyph"] {
     @include names($glyph-names);
+    font-variant-emoji: text;
     grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
     .tile-box {
         display: grid;
@@ -363,6 +412,13 @@ $media-queries: (
     gte-600px: ('>=600px',),
     retina2x: ('retina2x',),
     screen: ('screen',),
+    portrait: ('portrait',),
+    landscape: ('landscape',),
+    dark: ('dark',),
+    light: ('light',),
+    reduced-motion: ('reduced-motion',),
+    hover: ('hover',),
+    touch: ('touch',),
 );
 $media-names: ();
 @each $name, $conditions in $media-queries {
@@ -381,7 +437,175 @@ $media-names: ();
     }
 }
 
+// --- Accessibility
+
+.d-a11y {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    button, a {
+        @include a11y.focus-visible(var(--accent), 3px);
+        padding: .5rem 1rem;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        color: var(--fg);
+    }
+}
+
+.d-hidden {
+    @include a11y.visually-hidden;
+}
+
+.d-skip {
+    @include a11y.visually-hidden-focusable;
+}
+
+.d-motion {
+    width: 2rem;
+    height: 2rem;
+    background: var(--accent);
+    @include a11y.motion {
+        animation: a-attention-pulse 1s infinite;
+    }
+}
+
+// --- Color
+
+$color-bases: ('blue': #2f5bea, 'red': #ef476f, 'green': #06d6a0, 'yellow': #ffd166, 'gray': #808080);
+$color-names: ();
+@each $base, $color in $color-bases {
+    @each $step, $value in color.palette($color) {
+        .d-color__#{$base}-#{$step} {
+            background: $value;
+            color: color.text-color($value);
+            &::after { content: '#{color.contrast($value, color.text-color($value))}:1'; }
+        }
+        $color-names: list.append($color-names, '#{$base}-#{$step}');
+    }
+}
+
+[data-demo="color"] {
+    @include names($color-names);
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    gap: .25rem;
+    .tile-box {
+        @include layout.center;
+        height: 3rem;
+        border: 0;
+        font: 11px ui-monospace, monospace;
+    }
+}
+
+// --- Spacing & Fluid
+
+$space-names: ();
+@each $step, $value in spacing.$scale {
+    .d-space__#{$step} {
+        width: spacing.space($step);
+    }
+    $space-names: list.append($space-names, $step);
+}
+
+[data-demo="space"] {
+    @include names($space-names);
+    @include layout.stack(.25rem);
+    .tile {
+        flex-direction: row;
+        align-items: center;
+        > span { order: -1; width: 3rem; }
+    }
+    .tile-box {
+        height: 1rem;
+        border: 0;
+        background: var(--accent);
+    }
+}
+
+.d-fluid {
+    margin: 0;
+    font-size: fluid.value(1.25rem, 3rem);
+    @include fluid.property(padding, 8px, 2rem);
+    border: 1px dashed var(--line);
+}
+
 // --- Layout, Grid & Z-Index
+
+.d-clamp {
+    @include layout.line-clamp(2);
+    max-width: 24rem;
+}
+
+.d-layouts {
+    @include grid.auto-fill(14rem);
+    > div {
+        height: 9rem;
+        padding: .5rem;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        font: 12px ui-monospace, monospace;
+    }
+    span {
+        padding: .25rem .5rem;
+        background: var(--accent);
+        color: #fff;
+    }
+}
+
+.d-center { @include layout.center; }
+.d-center-grid { @include layout.center(grid); }
+.d-stack { @include layout.stack(.25rem); }
+.d-cluster { @include layout.cluster(.25rem); align-content: flex-start; }
+
+.d-ratio {
+    @include layout.aspect-ratio(16, 9);
+    position: relative;
+    height: auto !important;
+    > span { @include layout.absolute-center; }
+    &::before {
+        content: '';
+        @include layout.absolute-fullsize;
+        margin: 1rem;
+        border: 1px dashed var(--muted);
+    }
+}
+
+.d-auto-fill {
+    @include grid.auto-fill(6rem, .5rem);
+}
+
+.d-columns {
+    @include grid.columns(6, .5rem);
+    > :first-child { @include grid.span(4); }
+    > :nth-child(2) { @include grid.span(2); }
+    > :nth-child(3) { @include grid.span(6); }
+}
+
+.d-auto-fill, .d-columns {
+    margin-bottom: .5rem;
+    > div {
+        padding: .5rem;
+        background: var(--accent);
+        color: #fff;
+        font: 12px ui-monospace, monospace;
+    }
+}
+
+$layer-names: ();
+@each $name, $value in z-index.$layers {
+    .d-layer__#{$name}::before {
+        @include layout.center;
+        content: '#{$value}';
+        height: 100%;
+    }
+    $layer-names: list.append($layer-names, $name);
+}
+
+[data-demo="layer"] {
+    @include names($layer-names);
+    .tile-box { height: 2.5rem; }
+}
+
 
 .d-overflow {
     @include layout.no-text-overflow;
@@ -392,14 +616,15 @@ $media-names: ();
 
 .d-backdrop {
     @include layout.fixed-fullsize(1000);
-    background: rgb(0 0 0 / .4);
+    background: rgb(255 255 255 / .12);
 }
 
 .d-dialog {
     @include layout.fixed-center(1001);
     @include elevate.elevate-24;
     padding: 2rem;
-    background: #fff;
+    border: 1px solid var(--line);
+    background: var(--surface);
 }
 
 .d-backdrop, .d-dialog {
@@ -435,7 +660,7 @@ $media-names: ();
         height: 6rem;
         padding: .5rem;
         border: 1px solid var(--fg);
-        background: #fff;
+        background: var(--surface);
         font: 12px ui-monospace, monospace;
         // Labels in the corner the box above leaves visible
         display: flex;
@@ -521,6 +746,19 @@ $fns: (
     'z-index.$z-max': z-index.$z-max,
     'ease.$out-expo': ease.$out-expo,
     'font.$weight-values': font.$weight-values,
+    'break.point(md)': break.point(md),
+    'typography.px-to-em(24px)': typography.px-to-em(24px),
+    'typography.letter-spacing(0.5px, 1rem)': typography.letter-spacing(0.5px, 1rem),
+    'unit.strip-unit(16px)': unit.strip-unit(16px),
+    'spacing.space(2, 4, -1)': spacing.space(2, 4, -1),
+    'fluid.value(1rem, 2rem)': fluid.value(1rem, 2rem),
+    'z-index.layer(modal, 1)': z-index.layer(modal, 1),
+    'elevate.shadow(1)': elevate.shadow(1),
+    'color.tint(#2f5bea, 50%)': color.tint(#2f5bea, 50%),
+    'color.shade(#2f5bea, 50%)': color.shade(#2f5bea, 50%),
+    'color.luminance(#2f5bea)': color.luminance(#2f5bea),
+    'color.contrast(#777, #fff)': color.contrast(#777, #fff),
+    'color.text-color(#ffd166)': color.text-color(#ffd166),
 );
 
 $fn-names: ();

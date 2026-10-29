@@ -1,0 +1,47 @@
+// --- ENRON/FLUID
+
+// Values that scale with the viewport width, between a minimum and a maximum
+
+@use 'sass:math';
+@use 'break';
+@use 'typography';
+
+@function -rem($value) {
+    $value: typography.px-to-rem($value);
+    @if math.unit($value) != 'rem' {
+        @error "Expected px or rem, got `#{$value}`.";
+    }
+    @return $value;
+}
+
+@function -round($value) {
+    @return math.div(math.round($value * 10000), 10000);
+}
+
+/// `clamp()` that goes from `$min` at viewport width `$from` to `$max` at `$to`
+///
+/// @param {Number} $min - Value at `$from` and below, px or rem
+/// @param {Number} $max - Value at `$to` and above, px or rem
+/// @param {Number} $from - Viewport width
+/// @param {Number} $to - Viewport width
+/// @return {Calculation}
+/// @example scss
+///  font-size: fluid.value(1rem, 2rem); // clamp(1rem, -0.1429rem + 2.381vw, 2rem)
+@function value($min, $max, $from: break.point(sm), $to: break.point(xl)) {
+    $min: -rem($min);
+    $max: -rem($max);
+    $from: -rem($from);
+    $to: -rem($to);
+    $slope: math.div($max - $min, $to - $from);
+    $intercept: -round($min - $slope * $from);
+    $vw: -round($slope * 100) * 1vw;
+    @return clamp(math.min($min, $max), $intercept + $vw, math.max($min, $max));
+}
+
+/// Sets a property to a fluid value
+///
+/// @example scss
+///  @include fluid.property(padding-inline, 1rem, 3rem);
+@mixin property($property, $min, $max, $from: break.point(sm), $to: break.point(xl)) {
+    #{$property}: value($min, $max, $from, $to);
+}

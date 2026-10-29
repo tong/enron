@@ -1,0 +1,59 @@
+// --- ENRON/A11Y
+
+/// Hides an element visually but keeps it readable for screen readers
+///
+/// @example scss
+///  .label { @include a11y.visually-hidden; }
+@mixin visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/// Like `visually-hidden`, but shows the element while it or something inside has focus, e.g. a skip link
+@mixin visually-hidden-focusable {
+    &:not(:focus):not(:focus-within) {
+        @include visually-hidden;
+    }
+}
+
+/// Focus ring that only shows for keyboard focus
+///
+/// @param {Color} $color - Outline color
+/// @param {Number} $width - Outline width
+/// @param {Number} $offset - Outline offset
+@mixin focus-visible($color: currentColor, $width: 2px, $offset: 2px) {
+    &:focus {
+        outline: none;
+    }
+    &:focus-visible {
+        outline: $width solid $color;
+        outline-offset: $offset;
+    }
+}
+
+/// Styles for users who prefer reduced motion
+///
+/// @example scss
+///  .box {
+///      animation: fade_in 1s;
+///      @include a11y.reduced-motion { animation: none; }
+///  }
+@mixin reduced-motion {
+    @media (prefers-reduced-motion: reduce) {
+        @content;
+    }
+}
+
+/// Styles only for users who don't mind motion
+@mixin motion {
+    @media (prefers-reduced-motion: no-preference) {
+        @content;
+    }
+}

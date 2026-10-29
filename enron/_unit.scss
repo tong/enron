@@ -3,6 +3,11 @@
 @use 'sass:map';
 @use 'sass:math';
 
+/// Removes the unit, `strip-unit(16px)` is `16`
+@function strip-unit($value) {
+    @return math.div($value, $value * 0 + 1);
+}
+
 /// Convert one unit into another
 /// @param {Number} $value - Initial value. Unitless values get the desired unit.
 /// @param {String} $unit - Desired unit

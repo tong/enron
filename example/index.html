@@ -3,12 +3,12 @@
 <head>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width'>
-    <title>ENRON/S Example</title>
+    <title>ENRON Example</title>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
     <header>
-        <h1>ENRON/S</h1>
+        <h1>ENRON</h1>
         <p>Everything enron provides. Build with <code>npm run build:example</code>.</p>
         <nav>
             <a href="#animation">Animation</a>
@@ -20,6 +20,9 @@
             <a href="#ease">Ease</a>
             <a href="#glyph">Glyph</a>
             <a href="#break">Break &amp; Media</a>
+            <a href="#a11y">Accessibility</a>
+            <a href="#color">Color</a>
+            <a href="#spacing">Spacing &amp; Fluid</a>
             <a href="#layout">Layout, Grid &amp; Z-Index</a>
             <a href="#typography">Typography</a>
             <a href="#print">Print</a>
@@ -29,8 +32,10 @@
     <main>
         <section id="animation">
             <h2>Animation</h2>
-            <p><code>animation/attention</code>, <code>bounce</code>, <code>fade</code>, <code>flip</code>, <code>hinge</code>, <code>lightspeed</code>, <code>zoom</code>, every keyframe mixin, looped.</p>
+            <p><code>animation/attention</code>, <code>bounce</code>, <code>fade</code>, <code>flip</code>, <code>hinge</code>, <code>lightspeed</code>, <code>rotate</code>, <code>slide</code>, <code>zoom</code>, every keyframe mixin, looped.</p>
             <div class="tiles" data-demo="anim"></div>
+            <h3>animate.play (stops with reduced motion)</h3>
+            <div class="d-play"></div>
         </section>
 
         <section id="effect">
@@ -84,7 +89,7 @@
 
         <section id="glyph">
             <h2>Glyph</h2>
-            <p>Every <code>glyph</code> variable, including entity and legacy aliases</p>
+            <p>Every <code>glyph</code> character, by Unicode name. Each is also available under its HTML entity name, e.g. <code>glyph.$hearts</code>.</p>
             <div class="tiles" data-demo="glyph"></div>
         </section>
 
@@ -97,10 +102,46 @@
             <div class="tiles" data-demo="media"></div>
         </section>
 
+        <section id="a11y">
+            <h2>Accessibility</h2>
+            <p><code>a11y</code>. Press Tab to move through the controls: the focus ring only shows for keyboard focus.</p>
+            <div class="d-a11y">
+                <a class="d-skip" href="#layout">a11y.visually-hidden-focusable (shown on focus)</a>
+                <button type="button">a11y.focus-visible</button>
+                <button type="button">Button with hidden text<span class="d-hidden"> a11y.visually-hidden</span></button>
+                <div class="d-motion" title="a11y.motion"></div>
+                <span>a11y.motion, pulses unless reduced motion is on</span>
+            </div>
+        </section>
+
+        <section id="color">
+            <h2>Color</h2>
+            <p><code>color.palette</code>, with <code>color.text-color</code> and the <code>color.contrast</code> ratio on each shade</p>
+            <div class="tiles" data-demo="color"></div>
+        </section>
+
+        <section id="spacing">
+            <h2>Spacing &amp; Fluid</h2>
+            <h3>spacing.space</h3>
+            <div data-demo="space"></div>
+            <h3>fluid.value / fluid.property (resize the window)</h3>
+            <p class="d-fluid">Fluid font size and padding</p>
+        </section>
+
         <section id="layout">
             <h2>Layout, Grid &amp; Z-Index</h2>
             <h3>layout.no-text-overflow</h3>
             <div class="d-overflow">A line of text that is much too long to fit into its box</div>
+            <h3>layout.line-clamp</h3>
+            <p class="d-clamp">Many non-authoritarian organizations have foundered on the dubious principle of open membership. This paragraph is cut off after two lines, however long it gets, with an ellipsis at the end.</p>
+            <h3>layout.center / stack / cluster / aspect-ratio / absolute-center / absolute-fullsize</h3>
+            <div class="d-layouts">
+                <div class="d-center"><span>center</span></div>
+                <div class="d-center-grid"><span>center(grid)</span></div>
+                <div class="d-stack"><span>stack</span><span>stack</span><span>stack</span></div>
+                <div class="d-cluster"><span>cluster</span><span>of</span><span>wrapping</span><span>items</span><span>with</span><span>a gap</span></div>
+                <div class="d-ratio"><span>16 / 9</span></div>
+            </div>
             <h3>layout.fixed-fullsize / layout.fixed-center</h3>
             <button type="button" data-toggle="open">Open dialog</button>
             <div class="d-backdrop" data-toggle="open"></div>
@@ -112,6 +153,12 @@
             <div class="d-grid">
                 <div>A</div><div>B</div><div>C</div><div>D</div><div>E</div><div>F</div><div>G</div>
             </div>
+            <h3>grid.auto-fill</h3>
+            <div class="d-auto-fill"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div></div>
+            <h3>grid.columns / grid.span</h3>
+            <div class="d-columns"><div>span(4)</div><div>span(2)</div><div>span(6)</div><div>1</div><div>1</div><div>1</div></div>
+            <h3>z-index.$layers</h3>
+            <div class="tiles" data-demo="layer"></div>
             <h3>z-index</h3>
             <div class="d-z">
                 <div>z-max</div>
@@ -142,7 +189,7 @@
             <p>Open the print preview: the link shows its url, the shadow disappears and the last line is hidden.</p>
             <div class="d-print">
                 <p><a href="https://github.com/tong/enron">print.url-after-link</a></p>
-                <p><span class="d-shadow">print.remove-shadows</span></p>
+                <p class="stage"><span class="d-shadow">print.remove-shadows</span></p>
                 <p class="d-print-hidden">print.not</p>
             </div>
         </section>

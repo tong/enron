@@ -6,23 +6,25 @@
 @use 'sass:meta';
 @use 'sass:string';
 @use 'string' as str;
+@use 'break';
 
 // https://gist.github.com/jonathantneal/d0460e5c2d5d7f9bc5e6
 // https://eduardoboucas.github.io/include-media/#features
 
 ///
-/// Creates a list of global breakpoints
+/// Creates a list of global breakpoints. Defaults to `break.$points` (xs, sm, md, lg, xl),
+/// plus `phone`, and `tablet` and `desktop` as aliases of `sm` and `md`.
 ///
 /// @author Eduardo Boucas
 ///
 /// @example scss - Creates a single breakpoint with the label `phone`
 ///  $breakpoints: ('phone': 320px);
 ///
-$breakpoints: (
+$breakpoints: map.merge(break.$points, (
 	'phone': 340px,
-	'tablet': 768px,
-	'desktop': 1024px
-) !default;
+	'tablet': break.point(sm),
+	'desktop': break.point(md),
+)) !default;
 
 ///
 /// Creates a list of static expressions or media types
@@ -50,9 +52,18 @@ $media-expressions: (
 	'retina3x': (
 		'(-webkit-min-device-pixel-ratio: 3)',
 		'(min-resolution: 350dpi)'
-	)
+	),
+	'portrait': '(orientation: portrait)',
+	'landscape': '(orientation: landscape)',
+	'dark': '(prefers-color-scheme: dark)',
+	'light': '(prefers-color-scheme: light)',
+	'reduced-motion': '(prefers-reduced-motion: reduce)',
+	'hover': '(hover: hover)',
+	'touch': '(hover: none) and (pointer: coarse)'
 ) !default;
 
+///
+/// Unused since queries use the range syntax, `>128px` is `(width > 128px)`. Kept for compatibility.
 ///
 /// Defines a number to be added or subtracted from each unit when declaring breakpoints with exclusive intervals
 ///
@@ -223,23 +234,8 @@ $unit-intervals: (
   }
 
   @if ($is-width) {
-    $unit: math.unit($result);
-    $interval: 0;
-
-    @if (map.has-key($unit-intervals, $unit)) {
-      $interval: map.get($unit-intervals, $unit);
-    } @else {
-      @warn 'Unknown unit: #{$unit}';
-    }
-
-    @if ($operator == '>') {
-      $element: '(min-width: #{$result + $interval})';
-    } @else if ($operator == '<') {
-      $element: '(max-width: #{$result - $interval})';
-    } @else if ($operator == '>=') {
-      $element: '(min-width: #{$result})';
-    } @else if ($operator == '<=') {
-      $element: '(max-width: #{$result})';
+    @if list.index(('>', '<', '>=', '<='), $operator) {
+      $element: '(width #{$operator} #{$result})';
     } @else {
       @warn '#{$expression} is missing an operator.';
     }

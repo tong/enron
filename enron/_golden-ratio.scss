@@ -3,11 +3,12 @@
 // Golden Ratio Typography, see https://gist.github.com/gregrickaby/5001983
 
 @use 'sass:math';
+@use 'typography';
 
 /// The Golden Ratio, 1.61803398874989
 $phi: math.div(1 + math.sqrt(5), 2);
 
-$base-font-size: 16px !default;
+$base-font-size: typography.$root-font-size !default;
 $content-width: 700px !default;
 
 /// Optimal line height (unitless) for a font size and line width
@@ -32,6 +33,6 @@ $content-width: 700px !default;
 
 @mixin title-size($font-size: $base-font-size, $width: $content-width) {
     $size: title-size($font-size);
-    font-size: math.div($size, $font-size) * 1rem;
+    font-size: typography.px-to-rem($size);
     line-height: line-height($size, $width);
 }

@@ -19,16 +19,21 @@ Every module only defines variables, functions and mixins: `@use` emits no CSS u
 
 | Module | |
 |---|---|
-| `animation/*` | Keyframe mixins (attention, bounce, fade, flip, hinge, lightspeed, zoom). Every mixin takes a `$name` for the keyframes. |
+| `animation/*` | Keyframe mixins (attention, bounce, fade, flip, hinge, lightspeed, rotate, slide, zoom). Every mixin takes a `$name` for the keyframes. |
+| `animate` | `animate.play($name, ...)` plays keyframes, respecting reduced motion |
 | `effect/filmgrain`, `effect/underline` | Film grain overlay, link underline hover effects |
 | `hamburger`, `hamburger/*` | Hamburger menu button: `@include hamburger.base;` plus variants like `@include slider.styles;` |
+| `a11y` | `visually-hidden`, `visually-hidden-focusable`, `focus-visible`, `reduced-motion`, `motion` |
+| `color` | `tint`, `shade`, `palette`, `luminance`, `contrast`, `text-color` |
+| `spacing`, `fluid` | Spacing scale `spacing.space(2, 4)`, viewport based `clamp()` values `fluid.value(1rem, 2rem)` |
 | `background`, `pattern` | CSS gradient backgrounds and patterns |
 | `break` | Breakpoint media queries (`min`, `max`, `minmax`) |
-| `media` | Expression based media queries, `@include media.query('>phone', '<=tablet')` |
-| `ease`, `elevate`, `filter`, `glyph`, `z-index` | Constants and presets |
+| `media` | Expression based media queries, `@include media.query('>tablet', 'dark')`. Uses the `break` breakpoints |
+| `glyph` | 431 characters for `content`, by Unicode name (`$black-star`) and HTML entity name (`$hearts`) |
+| `ease`, `elevate`, `filter`, `z-index` | Constants and presets, `elevate.elevate($level)`, named layers `z-index.layer(modal)` |
 | `font`, `typography`, `golden-ratio` | `@font-face`, font weights, px to rem, golden ratio type sizes |
-| `grid`, `layout`, `link`, `print` | Layout helpers |
-| `string`, `unit` | String and unit functions |
+| `grid`, `layout`, `link`, `print` | Layout helpers: `center`, `stack`, `cluster`, `line-clamp`, `aspect-ratio`, `grid.auto-fill`, `grid.columns`, ... |
+| `string`, `unit` | String and unit functions, `unit.strip-unit` |
 
 ## Development
 

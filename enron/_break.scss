@@ -10,7 +10,11 @@ $points: (
     xl: 90rem  // ~1440px
 ) !default;
 
-@function -point($breakpoint) {
+/// Value of a breakpoint, e.g. `break.point(md)` is `64rem`
+///
+/// @param {String} $breakpoint - Key in `$points`
+/// @return {Number}
+@function point($breakpoint) {
     @if not map.has-key($points, $breakpoint) {
         @error "Unknown breakpoint `#{$breakpoint}`, expected one of: #{map.keys($points)}.";
     }
@@ -25,11 +29,11 @@ $points: (
     }
     @if $min {
         @if $query != '' { $query: $query + ' and '; }
-        $query: $query + '(min-width: #{-point($min)})';
+        $query: $query + '(min-width: #{point($min)})';
     }
     @if $max {
         @if $query != '' { $query: $query + ' and '; }
-        $query: $query + '(width < #{-point($max)})';
+        $query: $query + '(width < #{point($max)})';
     }
     @return $query;
 }

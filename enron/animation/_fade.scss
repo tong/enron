@@ -82,3 +82,57 @@
         }
     }
 }
+
+// --- Fade out
+
+@mixin out-down($from:1, $to: 0, $offset:100%, $name: fade_out_down) {
+    @keyframes #{$name} {
+        from {
+            opacity: $from;
+        }
+
+        100% {
+            opacity: $to;
+            transform: translate3d(0, $offset, 0);
+        }
+    }
+}
+
+@mixin out-up($from:1, $to: 0, $offset:-100%, $name: fade_out_up) {
+    @keyframes #{$name} {
+        from {
+            opacity: $from;
+        }
+
+        100% {
+            opacity: $to;
+            transform: translate3d(0, $offset, 0);
+        }
+    }
+}
+
+@mixin out-left($from:1, $to: 0, $offset:-100%, $name: fade_out_left) {
+    @keyframes #{$name} {
+        from {
+            opacity: $from;
+        }
+
+        100% {
+            opacity: $to;
+            transform: translate3d($offset, 0, 0);
+        }
+    }
+}
+
+@mixin out-right($from:1, $to: 0, $offset:100%, $name: fade_out_right) {
+    @keyframes #{$name} {
+        from {
+            opacity: $from;
+        }
+
+        100% {
+            opacity: $to;
+            transform: translate3d($offset, 0, 0);
+        }
+    }
+}

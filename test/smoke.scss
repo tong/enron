@@ -1,0 +1,150 @@
+// Calls every public mixin and checks function results.
+// Fails to compile if anything is broken: `npm test`
+
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+
+@use 'enron/animation/attention';
+@use 'enron/animation/bounce';
+@use 'enron/animation/fade';
+@use 'enron/animation/flip';
+@use 'enron/animation/hinge';
+@use 'enron/animation/lightspeed';
+@use 'enron/animation/rotate';
+@use 'enron/animation/slide';
+@use 'enron/animation/zoom';
+@use 'enron/effect/filmgrain';
+@use 'enron/effect/underline';
+@use 'enron/hamburger';
+@use 'enron/hamburger/slider';
+@use 'enron/hamburger/spin';
+@use 'enron/hamburger/vortex';
+@use 'enron/a11y';
+@use 'enron/animate';
+@use 'enron/background';
+@use 'enron/break';
+@use 'enron/color';
+@use 'enron/ease';
+@use 'enron/elevate';
+@use 'enron/filter';
+@use 'enron/fluid';
+@use 'enron/font';
+@use 'enron/glyph';
+@use 'enron/golden-ratio';
+@use 'enron/grid';
+@use 'enron/layout';
+@use 'enron/link';
+@use 'enron/media';
+@use 'enron/pattern';
+@use 'enron/print';
+@use 'enron/spacing';
+@use 'enron/string';
+@use 'enron/typography';
+@use 'enron/unit';
+@use 'enron/z-index';
+
+@mixin assert-equal($actual, $expected, $message) {
+    @if $actual != $expected {
+        @error '#{$message}: expected #{meta.inspect($expected)}, got #{meta.inspect($actual)}';
+    }
+}
+
+// --- Every mixin that works without arguments
+
+$namespaces: attention bounce fade flip hinge lightspeed rotate slide zoom animate filmgrain underline hamburger slider spin vortex a11y background break elevate filter fluid font golden-ratio grid layout link media pattern print typography z-index;
+
+// Mixins with required arguments, called explicitly below
+$needs-args: (
+    break: (min, max, minmax),
+    animate: (play,),
+    elevate: (elevate,),
+    fluid: (property,),
+    grid: (span,),
+    font: (font-face,),
+    media: (query,),
+    z-index: (z, layer),
+);
+
+@each $ns in $namespaces {
+    @each $name, $mixin in meta.module-mixins($ns) {
+        @if not list.index(map.get($needs-args, $ns) or (), $name) {
+            .smoke-#{$ns}-#{$name} {
+                @if meta.accepts-content($mixin) {
+                    @include meta.apply($mixin) { color: red; }
+                } @else {
+                    @include meta.apply($mixin);
+                }
+            }
+        }
+    }
+}
+
+// --- Mixins with arguments
+
+.smoke-args {
+    @include break.min(sm) { color: red; }
+    @include break.max(md, screen) { color: red; }
+    @include break.minmax(sm, lg) { color: red; }
+    @include media.query('>phone') { color: red; }
+    @include media.query('>=350px', '<tablet') { color: red; }
+    @include media.query('>phone', 'retina2x') { color: red; }
+    @include z-index.z(5);
+    @include elevate.elevate(8, red, green, blue);
+    @include a11y.focus-visible(red, 3px);
+    @include animate.play(fade_in, 500ms, ease-out, $iterations: infinite);
+    @include fluid.property(padding, 16px, 2rem);
+    @include grid.span(3);
+    @include z-index.layer(modal, 1);
+    @include layout.center(grid);
+    @include layout.line-clamp(3);
+    @include layout.fixed-center(10);
+    @include background.dots(2px, 20px, red, blue);
+    @include filmgrain.filmgrain($img: '../assets/noise.png');
+}
+
+@include font.font-face('My Font', 'fonts/my-font', 400, normal);
+@include fade.in($from: 0.5, $name: fade_in_half);
+
+// --- Functions
+
+@include assert-equal(string.replace('a b c', ' ', '_'), 'a_b_c', 'string.replace');
+@include assert-equal(string.replace-first('a', 'x', 'abca'), 'xbca', 'string.replace-first');
+@include assert-equal(string.to-number('12px'), 12px, 'string.to-number px');
+@include assert-equal(string.to-number('-1.5rem'), -1.5rem, 'string.to-number negative');
+@include assert-equal(string.to-number('42'), 42, 'string.to-number unitless');
+@include assert-equal(unit.convert-unit(10, 'px'), 10px, 'unit.convert-unit unitless');
+@include assert-equal(unit.convert-unit(1in, 'px'), 96px, 'unit.convert-unit compatible');
+@include assert-equal(typography.px-to-rem(32px), 2rem, 'typography.px-to-rem');
+@include assert-equal(typography.$font-weight-values, font.$weight-values, 'typography weights');
+@include assert-equal(golden-ratio.title-size(16px), 42px, 'golden-ratio.title-size');
+@include assert-equal(meta.type-of(golden-ratio.line-height()), 'number', 'golden-ratio.line-height');
+@include assert-equal(glyph.$copy, glyph.$copyright-sign, 'glyph entity alias');
+@include assert-equal(glyph.$pound_sterling_sign, glyph.$pound-sign, 'glyph legacy alias');
+@include assert-equal(glyph.$Alpha, '\391', 'glyph capital entity');
+@include assert-equal(glyph.$alpha, glyph.$small-alpha, 'glyph small entity');
+@include assert-equal(glyph.$hearts, glyph.$black-heart-suit, 'glyph symbol entity');
+@include assert-equal(glyph.$euro, '\20ac', 'glyph currency');
+@include assert-equal(glyph.$lambda, glyph.$small-lambda, 'glyph lambda spelling');
+@include assert-equal(meta.type-of(ease.$in-out-quad), 'string', 'ease');
+@include assert-equal(break.point(md), 64rem, 'break.point');
+@include assert-equal(map.get(media.$breakpoints, tablet), break.point(sm), 'media uses break points');
+@include assert-equal(media.parse-expression('>tablet'), '(width > 48rem)', 'media range syntax');
+@include assert-equal(media.parse-expression('dark'), '(prefers-color-scheme: dark)', 'media dark');
+@include assert-equal(typography.letter-spacing(0.5px, 1rem), 0.03125em, 'typography.letter-spacing');
+@include assert-equal(typography.px-to-em(24px), 1.5em, 'typography.px-to-em');
+@include assert-equal(unit.strip-unit(16px), 16, 'unit.strip-unit');
+@include assert-equal(z-index.layer(modal, 1), 1301, 'z-index.layer');
+@include assert-equal(spacing.space(4), 1rem, 'spacing.space');
+@include assert-equal(spacing.space(2, 4, -1), (0.5rem 1rem -0.25rem), 'spacing.space list');
+@include assert-equal(meta.inspect(fluid.value(1rem, 2rem)), 'clamp(1rem, -0.1429rem + 2.381vw, 2rem)', 'fluid.value');
+@include assert-equal(meta.inspect(fluid.value(32px, 16px)), 'clamp(1rem, 3.1429rem - 2.381vw, 2rem)', 'fluid.value shrinking');
+@include assert-equal(color.contrast(#000, #fff), 21, 'color.contrast');
+@include assert-equal(color.contrast(#777, #fff), 4.48, 'color.contrast gray');
+@include assert-equal(color.text-color(#ffd166), #000, 'color.text-color light background');
+@include assert-equal(color.text-color(#2f5bea), #fff, 'color.text-color dark background');
+@include assert-equal(color.tint(#000, 100%), #fff, 'color.tint');
+@include assert-equal(map.get(color.palette(#2f5bea), 500), #2f5bea, 'color.palette');
+@include assert-equal(golden-ratio.$base-font-size, typography.$root-font-size, 'golden-ratio base');
+@include assert-equal(map.get(font.$weight-values, semi-bold), 600, 'font semi-bold');
+@include assert-equal(elevate.shadow(2), (0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12)), 'elevate.shadow');

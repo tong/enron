@@ -1,0 +1,35 @@
+// --- ENRON/ANIMATE
+
+/// Plays a keyframe animation. With reduced motion preferred, it jumps to the end state.
+///
+/// @param {String} $name - Keyframes name, e.g. from `@include fade.in;`
+/// @param {Time} $duration - Duration
+/// @param {String} $timing - Timing function, e.g. `ease.$out-back`
+/// @param {Time} $delay - Delay
+/// @param {Number | String} $iterations - Iteration count or `infinite`
+/// @param {String} $fill - Fill mode
+/// @param {String} $direction - Direction
+/// @param {Boolean} $reduced-motion - Respect `prefers-reduced-motion`
+///
+/// @example scss
+///  @include fade.in;
+///  .box { @include animate.play(fade_in, 500ms, ease.$out-cubic); }
+@mixin play(
+    $name,
+    $duration: 1s,
+    $timing: ease,
+    $delay: 0s,
+    $iterations: 1,
+    $fill: both,
+    $direction: normal,
+    $reduced-motion: true
+) {
+    animation: $name $duration $timing $delay $iterations $direction $fill;
+    @if $reduced-motion {
+        @media (prefers-reduced-motion: reduce) {
+            animation-duration: 1ms;
+            animation-delay: 0s;
+            animation-iteration-count: 1;
+        }
+    }
+}

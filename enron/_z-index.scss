@@ -1,6 +1,30 @@
 // --- ENRON/Z-INDEX
 
+@use 'sass:map';
+
 $z-max: 2147483647 !default;
+
+/// Named layers, from bottom to top
+$layers: (
+    base: 0,
+    dropdown: 1000,
+    sticky: 1100,
+    overlay: 1200,
+    modal: 1300,
+    popover: 1400,
+    toast: 1500,
+    tooltip: 1600,
+) !default;
+
+/// z-index of a named layer. A number moves above or below it, `layer(modal, 1)`.
+@function layer($name, $offset: 0) {
+    @if not map.has-key($layers, $name) {
+        @error "Unknown layer `#{$name}`, expected one of: #{map.keys($layers)}.";
+    }
+    @return map.get($layers, $name) + $offset;
+}
+
+@mixin layer($name, $offset: 0) { z-index: layer($name, $offset) }
 
 @mixin z($i) { z-index: $i }
 

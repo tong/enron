@@ -7,3 +7,22 @@
     grid-template-rows: 61.8% 9.02% 5.58% 23.6%;
     grid-template-areas: "A B B B" "A E F C" "A E G C" "A D D C";
 }
+
+/// As many columns as fit, each at least `$min` wide
+@mixin auto-fill($min: 10rem, $gap: 1rem) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, $min), 1fr));
+    gap: $gap;
+}
+
+/// A fixed number of equal columns
+@mixin columns($count: 12, $gap: 1rem) {
+    display: grid;
+    grid-template-columns: repeat($count, minmax(0, 1fr));
+    gap: $gap;
+}
+
+/// Lets a child of `columns` span several columns
+@mixin span($columns) {
+    grid-column: span $columns;
+}

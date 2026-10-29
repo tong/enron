@@ -5,18 +5,40 @@
 @use 'sass:string';
 @use 'font';
 
-// $basesize: 16 !default;
-// $basesize_px: $basesize * 1px;
-// @debug $basesize;
-// @debug $basesize_px;
+/// Root font size, what `1rem` is
+$root-font-size: 16px !default;
 $font-family: string.unquote('serif') !default;
 $font-weight-values: font.$weight-values !default;
 
+/// Converts tracking in px to a letter spacing in em
+///
+/// @param {Number} $tracking - Tracking in px
+/// @param {Number} $font-size - Font size in px or rem
+/// @return {Number}
+/// @example scss
+///  letter-spacing: typography.letter-spacing(0.5px, 16px); // 0.03125em
+@function letter-spacing($tracking, $font-size) {
+    @if math.unit($font-size) == 'rem' {
+        $font-size: math.div($font-size, 1rem) * $root-font-size;
+    }
+    @return math.div($tracking, $font-size) * 1em;
+}
+
+/// @deprecated Use `letter-spacing($tracking * 1px, $size * 1rem)`
 @function get-letter-spacing_($tracking, $size) {
-    // @return math.div($tracking, ($font-size * 16)) * 1em;
+    @warn '`typography.get-letter-spacing_` is deprecated, use `typography.letter-spacing`.';
     @return math.div($tracking, ($size * 16)) * 1em;
 }
 
+/// Converts px to em, relative to the font size of the context
+@function px-to-em($px, $context: $root-font-size) {
+    @if not math.compatible($px, 1px) {
+        @return $px;
+    }
+    @return math.div($px, $context) * 1em;
+}
+
+/// Converts px to rem, based on `$root-font-size`. Other units are returned as is.
 @function px-to-rem($px) {
     @if $px == null {
         @return null;
@@ -25,37 +47,5 @@ $font-weight-values: font.$weight-values !default;
         // Value is something other than px, use as-is.
         @return $px;
     }
-    @return math.div($px, 16px) * 1rem;
+    @return math.div($px, $root-font-size) * 1rem;
 }
-//
-// @function is-typography-style($style) {
-//     @return map.has-key($styles, $style);
-// }
-//
-// @function get-typography-styles() {
-//     @return map.keys($styles);
-// }
-//
-// @function get-font($typography) {
-//     @return map.get($styles, $typography, font-family);
-// }
-//
-//  
-// @mixin body1 {
-//     font-size: px-to-rem($basesize);
-//     // line-height: px-to-rem(24);
-//     font-weight: map.get($font-weight-values, regular);
-//     letter-spacing: get-letter-spacing_(0.5, 1);
-//     text-decoration: inherit;
-//     text-transform: inherit;
-// }
-//
-// @mixin body2 {
-//     font-size: px-to-rem(14px);
-//     line-height: px-to-rem(20px);
-//     font-weight: map.get($font-weight-values, regular);
-//     letter-spacing: get-letter-spacing_(0.25, 0.875);
-//     text-decoration: inherit;
-//     text-transform: inherit;
-// }
-// /

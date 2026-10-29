@@ -4,6 +4,8 @@
 @use 'enron/animation/flip';
 @use 'enron/animation/hinge';
 @use 'enron/animation/lightspeed';
+@use 'enron/animation/rotate';
+@use 'enron/animation/slide';
 @use 'enron/animation/zoom';
 @use 'enron/effect/filmgrain';
 @use 'enron/effect/underline';
@@ -11,11 +13,15 @@
 @use 'enron/hamburger/slider';
 @use 'enron/hamburger/spin';
 @use 'enron/hamburger/vortex';
+@use 'enron/a11y';
+@use 'enron/animate';
 @use 'enron/background';
 @use 'enron/break';
+@use 'enron/color';
 @use 'enron/ease';
 @use 'enron/elevate';
 @use 'enron/filter';
+@use 'enron/fluid';
 @use 'enron/font';
 @use 'enron/glyph';
 @use 'enron/golden-ratio';
@@ -25,6 +31,7 @@
 @use 'enron/media';
 @use 'enron/pattern';
 @use 'enron/print';
+@use 'enron/spacing';
 @use 'enron/string';
 @use 'enron/typography';
 @use 'enron/unit';
