@@ -13,7 +13,6 @@
   "scripts": {
     "dev": "sass index.scss index.css --watch",
     "build": "sass index.scss index.css --no-source-map --fatal-deprecation=1.107.0",
-    "build:test": "sass test/main.scss test/main.css -I .",
     "build:example": "sass example/main.scss example/main.css --no-source-map --fatal-deprecation=1.107.0",
     "dev:example": "sass example/main.scss example/main.css --watch",
     "test": "sass test/smoke.scss test/smoke.css -I . --no-source-map --fatal-deprecation=1.107.0",
