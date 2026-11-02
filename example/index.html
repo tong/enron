@@ -11,31 +11,70 @@
         <h1>ENRON</h1>
         <p>Everything enron provides. Build with <code>npm run build:example</code>.</p>
         <nav>
+            <a href="#a11y">Accessibility</a>
             <a href="#animation">Animation</a>
+            <a href="#pattern">Background &amp; Pattern</a>
+            <a href="#break">Break &amp; Media</a>
+            <a href="#color">Color</a>
+            <a href="#ease">Ease</a>
             <a href="#effect">Effect</a>
-            <a href="#hamburger">Hamburger</a>
             <a href="#elevate">Elevate</a>
             <a href="#filter">Filter</a>
-            <a href="#pattern">Background &amp; Pattern</a>
-            <a href="#ease">Ease</a>
-            <a href="#glyph">Glyph</a>
-            <a href="#break">Break &amp; Media</a>
-            <a href="#a11y">Accessibility</a>
-            <a href="#color">Color</a>
-            <a href="#spacing">Spacing &amp; Fluid</a>
-            <a href="#layout">Layout, Grid &amp; Z-Index</a>
-            <a href="#typography">Typography</a>
-            <a href="#print">Print</a>
             <a href="#functions">Functions</a>
+            <a href="#glyph">Glyph</a>
+            <a href="#hamburger">Hamburger</a>
+            <a href="#layout">Layout, Grid &amp; Z-Index</a>
+            <a href="#print">Print</a>
+            <a href="#spacing">Spacing &amp; Fluid</a>
+            <a href="#typography">Typography</a>
         </nav>
     </header>
     <main>
+        <section id="a11y">
+            <h2>Accessibility</h2>
+            <p><code>a11y</code>. Press Tab to move through the controls: the focus ring only shows for keyboard focus.</p>
+            <div class="d-a11y">
+                <a class="d-skip" href="#layout">a11y.visually-hidden-focusable (shown on focus)</a>
+                <button type="button">a11y.focus-visible</button>
+                <button type="button">Button with hidden text<span class="d-hidden"> a11y.visually-hidden</span></button>
+                <div class="d-motion" title="a11y.motion"></div>
+                <span>a11y.motion, pulses unless reduced motion is on</span>
+            </div>
+        </section>
+
         <section id="animation">
             <h2>Animation</h2>
             <p><code>animation/attention</code>, <code>bounce</code>, <code>fade</code>, <code>flip</code>, <code>hinge</code>, <code>lightspeed</code>, <code>rotate</code>, <code>slide</code>, <code>zoom</code>, every keyframe mixin, looped.</p>
             <div class="tiles" data-demo="anim"></div>
             <h3>animate.play (stops with reduced motion)</h3>
             <div class="d-play"></div>
+        </section>
+
+        <section id="pattern">
+            <h2>Background &amp; Pattern</h2>
+            <p><code>background</code> and <code>pattern</code> with default arguments</p>
+            <div class="tiles" data-demo="pattern"></div>
+        </section>
+
+        <section id="break">
+            <h2>Break &amp; Media</h2>
+            <p>Highlighted tiles match the current viewport. Resize the window.</p>
+            <h3>break.min / break.max / break.minmax</h3>
+            <div class="tiles" data-demo="break"></div>
+            <h3>media.query</h3>
+            <div class="tiles" data-demo="media"></div>
+        </section>
+
+        <section id="color">
+            <h2>Color</h2>
+            <p><code>color.palette</code>, with <code>color.text-color</code> and the <code>color.contrast</code> ratio on each shade</p>
+            <div class="tiles" data-demo="color"></div>
+        </section>
+
+        <section id="ease">
+            <h2>Ease</h2>
+            <p><code>ease</code> timing functions</p>
+            <div class="tiles" data-demo="ease"></div>
         </section>
 
         <section id="effect">
@@ -52,17 +91,6 @@
             </div>
         </section>
 
-        <section id="hamburger">
-            <h2>Hamburger</h2>
-            <p><code>hamburger.base</code> with <code>slider</code>, <code>spin</code>, <code>vortex</code>. Click to toggle <code>.active</code>.</p>
-            <div class="hamburgers">
-                <button class="hamburger" type="button" aria-label="base"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button>
-                <button class="hamburger hamburger--slider" type="button" aria-label="slider"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button>
-                <button class="hamburger hamburger--spin" type="button" aria-label="spin"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button>
-                <button class="hamburger hamburger--vortex" type="button" aria-label="vortex"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button>
-            </div>
-        </section>
-
         <section id="elevate">
             <h2>Elevate</h2>
             <p><code>elevate.elevate-0</code> to <code>elevate-24</code></p>
@@ -75,16 +103,10 @@
             <div class="tiles" data-demo="filter"></div>
         </section>
 
-        <section id="pattern">
-            <h2>Background &amp; Pattern</h2>
-            <p><code>background</code> and <code>pattern</code> with default arguments</p>
-            <div class="tiles" data-demo="pattern"></div>
-        </section>
-
-        <section id="ease">
-            <h2>Ease</h2>
-            <p><code>ease</code> timing functions</p>
-            <div class="tiles" data-demo="ease"></div>
+        <section id="functions">
+            <h2>Functions</h2>
+            <p>Values computed at compile time</p>
+            <div data-demo="fn"></div>
         </section>
 
         <section id="glyph">
@@ -93,39 +115,15 @@
             <div class="tiles" data-demo="glyph"></div>
         </section>
 
-        <section id="break">
-            <h2>Break &amp; Media</h2>
-            <p>Highlighted tiles match the current viewport. Resize the window.</p>
-            <h3>break.min / break.max / break.minmax</h3>
-            <div class="tiles" data-demo="break"></div>
-            <h3>media.query</h3>
-            <div class="tiles" data-demo="media"></div>
-        </section>
-
-        <section id="a11y">
-            <h2>Accessibility</h2>
-            <p><code>a11y</code>. Press Tab to move through the controls: the focus ring only shows for keyboard focus.</p>
-            <div class="d-a11y">
-                <a class="d-skip" href="#layout">a11y.visually-hidden-focusable (shown on focus)</a>
-                <button type="button">a11y.focus-visible</button>
-                <button type="button">Button with hidden text<span class="d-hidden"> a11y.visually-hidden</span></button>
-                <div class="d-motion" title="a11y.motion"></div>
-                <span>a11y.motion, pulses unless reduced motion is on</span>
+        <section id="hamburger">
+            <h2>Hamburger</h2>
+            <p><code>hamburger.base</code> with <code>slider</code>, <code>spin</code>, <code>vortex</code>. Click to toggle <code>.active</code>.</p>
+            <div class="hamburgers">
+                <button class="hamburger" type="button" aria-label="base"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button>
+                <button class="hamburger hamburger--slider" type="button" aria-label="slider"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button>
+                <button class="hamburger hamburger--spin" type="button" aria-label="spin"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button>
+                <button class="hamburger hamburger--vortex" type="button" aria-label="vortex"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button>
             </div>
-        </section>
-
-        <section id="color">
-            <h2>Color</h2>
-            <p><code>color.palette</code>, with <code>color.text-color</code> and the <code>color.contrast</code> ratio on each shade</p>
-            <div class="tiles" data-demo="color"></div>
-        </section>
-
-        <section id="spacing">
-            <h2>Spacing &amp; Fluid</h2>
-            <h3>spacing.space</h3>
-            <div data-demo="space"></div>
-            <h3>fluid.value / fluid.property (resize the window)</h3>
-            <p class="d-fluid">Fluid font size and padding</p>
         </section>
 
         <section id="layout">
@@ -168,6 +166,24 @@
             </div>
         </section>
 
+        <section id="print">
+            <h2>Print</h2>
+            <p>Open the print preview: the link shows its url, the shadow disappears and the last line is hidden.</p>
+            <div class="d-print">
+                <p><a href="https://github.com/tong/enron">print.url-after-link</a></p>
+                <p class="stage"><span class="d-shadow">print.remove-shadows</span></p>
+                <p class="d-print-hidden">print.not</p>
+            </div>
+        </section>
+
+        <section id="spacing">
+            <h2>Spacing &amp; Fluid</h2>
+            <h3>spacing.space</h3>
+            <div data-demo="space"></div>
+            <h3>fluid.value / fluid.property (resize the window)</h3>
+            <p class="d-fluid">Fluid font size and padding</p>
+        </section>
+
         <section id="typography">
             <h2>Typography</h2>
             <p><code>typography</code>, <code>golden-ratio</code>, <code>font</code></p>
@@ -182,22 +198,6 @@
             </div>
             <h3>font.$weight-values</h3>
             <div class="tiles" data-demo="weight"></div>
-        </section>
-
-        <section id="print">
-            <h2>Print</h2>
-            <p>Open the print preview: the link shows its url, the shadow disappears and the last line is hidden.</p>
-            <div class="d-print">
-                <p><a href="https://github.com/tong/enron">print.url-after-link</a></p>
-                <p class="stage"><span class="d-shadow">print.remove-shadows</span></p>
-                <p class="d-print-hidden">print.not</p>
-            </div>
-        </section>
-
-        <section id="functions">
-            <h2>Functions</h2>
-            <p>Values computed at compile time</p>
-            <div data-demo="fn"></div>
         </section>
     </main>
     <script>
